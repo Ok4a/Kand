@@ -1,73 +1,71 @@
 import numpy as np
 from time import perf_counter
-rng = np.random.default_rng()
+rng = np.random.default_rng(seed=1)
 
 
-def CG(A, b):
+def CG(A, b, tol):
     if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
         raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
     size = np.size(b)
     x = np.zeros((size, 1)) # initial starting point
     
-    r_current = b - np.matmul(A, x) # residual
-    if np.linalg.norm(r_current) < np.power(1/10, 10): # check if initial point works
+    r = b - A.dot(x) # residual
+    if np.linalg.norm(r) < tol: # check if initial point works
         return x
-    rr_cur_prod = np.matmul(r_current.T, r_current)
+    rr_cur_prod = np.dot(r.T, r)
+    p = r.copy()
 
-    p = r_current
-
-    k = 1
+    k = 0
     while True:
-        Ap_prod = np.matmul(A, p)
+        Ap_prod = A.dot(p)
+        alpha = rr_cur_prod / np.dot(p.T, Ap_prod)
 
-        alpha = (rr_cur_prod / np.matmul(p.T, Ap_prod))[0,0]
+        x += alpha * p # next point
 
-        x = x + alpha * p # next point
+        r -= alpha * Ap_prod
 
-        r_next = r_current - alpha * Ap_prod
-
-        if np.linalg.norm(r_next) < np.power(1/10, 10): # check if residual is zero
-            print("k =",k,np.linalg.norm(r_next))
-            return x, r_next
+        if np.linalg.norm(r) < tol: # check if residual is zero
+            print("k =", k, np.linalg.norm(r))
+            return x
         
-        rr_next_prod = np.matmul(r_next.T, r_next)
-        beta = (rr_next_prod / rr_cur_prod)[0, 0]
-        p = r_next + beta * p
+        rr_next_prod = np.dot(r.T, r)
+        
+        beta = rr_next_prod / rr_cur_prod
+        p = r + beta * p
 
         rr_cur_prod = rr_next_prod
-        r_current = r_next
 
         k += 1
 
-def PrecondCG(A, b, M_inv):
+def PrecondCG(A, b, M_inv, tol):
     if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
         raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
     size = np.size(b)
     x = np.zeros((size, 1)) # initial starting point
     
-    r_current = b - np.matmul(A,x) # residual
+    r_current = b - np.dot(A,x) # residual
     if np.linalg.norm(r_current) < np.power(1/10, 10): # check if initial point works
         return x
     
-    p = np.matmul(M_inv,r_current)
-    rMr_cur_prod = np.matmul(r_current.T, p)
+    p = np.dot(M_inv,r_current).copy()
+    rMr_cur_prod = np.dot(r_current.T, p)
 
-    k = 1
+    k = 0
     while True:
-        Ap_prod = np.matmul(A, p)
+        Ap_prod = np.dot(A, p)
 
-        alpha = (rMr_cur_prod / np.matmul(p.T, Ap_prod))[0,0]
+        alpha = (rMr_cur_prod / np.dot(p.T, Ap_prod))[0,0]
         
         x = x + alpha * p
         r_next = r_current - alpha * Ap_prod    
 
-        if np.linalg.norm(r_next) < np.power(1/10, 10): # check if residual is zero
+        if np.linalg.norm(r_next) < tol: # check if residual is zero
             print("k =",k,np.linalg.norm(r_next))
-            return x, r_next
+            return x
         
-        Mr = np.matmul(M_inv, r_next)
+        Mr = np.dot(M_inv, r_next)
         
-        rMr_next_prod = np.matmul(r_next.T, Mr)
+        rMr_next_prod = np.dot(r_next.T, Mr)
 
         beta = (rMr_next_prod / rMr_cur_prod)[0, 0]
 
@@ -79,33 +77,34 @@ def PrecondCG(A, b, M_inv):
 
         k += 1
 
-
 def randAb(size, l, u):
     A = rng.random((size, size)) * (u - l) + l
-    A = np.matmul(A, A.T)
+    A = np.dot(A, A.T)
 
     b = rng.random((size,1)) * (u - l) + l
+    # b = np.ones((size,1))
 
     return A, b
 
 
 if __name__ == "__main__":
-    size = 1000
+    size = 500
+    tol = np.pow(1/10, 10)
     A, b = randAb(size, 1, -1)
     M_inv = (np.diag(1/np.diag(A)))
 
     condA = np.linalg.cond(A)
-    condMA = np.linalg.cond(np.matmul(M_inv, A))
+    condMA = np.linalg.cond(np.dot(M_inv, A))
     print(size, condA, condMA)
     print()
 
     start = perf_counter()
-    x,r = CG(A, b)
+    x = CG(A, b, tol)
     print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.matmul(A, x) - b))
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b))
     print()
 
     start = perf_counter()
-    x,r = PrecondCG(A, b, M_inv)
+    x = PrecondCG(A, b, M_inv, tol)
     print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.matmul(A, x) - b))
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b))
