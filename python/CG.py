@@ -3,7 +3,7 @@ from time import perf_counter
 rng = np.random.default_rng(seed=1)
 
 
-def CG(A, b, tol):
+def CG(A, b, tol = np.pow(1/10, 10)):
     if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
         raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
     size = np.size(b)
@@ -36,7 +36,6 @@ def CG(A, b, tol):
         rr_cur_prod = rr_next_prod
 
         k += 1
-
 def PrecondCG(A, b, M_inv, tol):
     if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
         raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
@@ -77,6 +76,51 @@ def PrecondCG(A, b, M_inv, tol):
 
         k += 1
 
+def NewCG(A, b, precond = None, tol= np.pow(1/10, 10)):
+    if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
+        raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
+    
+    size = np.size(b)
+    x = np.zeros((size, 1)) # initial starting point
+    
+    r = b - A.dot(x) # residual
+    if np.linalg.norm(r) < tol: # check if initial point works
+        return x
+    
+    if type(precond) == type(None):
+        rr_cur_prod = np.dot(r.T, r)
+        p = r.copy()
+    else:
+        p = np.dot(M_inv, r).copy()
+        rr_cur_prod = np.dot(r.T, p)
+
+    k = 0
+    while True:
+        Ap_prod = A.dot(p)
+        alpha = rr_cur_prod / np.dot(p.T, Ap_prod)
+
+        x += alpha * p # next point
+
+        r -= alpha * Ap_prod
+
+        if np.linalg.norm(r) < tol: # check if residual is zero
+            print("k =", k, np.linalg.norm(r))
+            return x
+        
+        if type(precond) == type(None):
+            rr_next_prod = np.dot(r.T, r)
+            beta = rr_next_prod / rr_cur_prod
+            p = r + beta * p
+        else:
+            Mr = np.dot(M_inv, r)
+            rr_next_prod = np.dot(r.T, Mr)
+            beta = rr_next_prod / rr_cur_prod
+            p = Mr + beta * p
+
+        rr_cur_prod = rr_next_prod
+
+        k += 1
+
 def randAb(size, l, u):
     A = rng.random((size, size)) * (u - l) + l
     A = np.dot(A, A.T)
@@ -89,22 +133,22 @@ def randAb(size, l, u):
 
 if __name__ == "__main__":
     size = 500
-    tol = np.pow(1/10, 10)
     A, b = randAb(size, 1, -1)
-    M_inv = (np.diag(1/np.diag(A)))
+    M_inv = np.diag(1/np.diag(A))
 
     condA = np.linalg.cond(A)
     condMA = np.linalg.cond(np.dot(M_inv, A))
     print(size, condA, condMA)
     print()
 
+
     start = perf_counter()
-    x = CG(A, b, tol)
+    x = NewCG(A, b)
     print("time", perf_counter() - start)
     print("sol norm", np.linalg.norm(np.dot(A, x) - b))
     print()
 
     start = perf_counter()
-    x = PrecondCG(A, b, M_inv, tol)
+    x = NewCG(A, b, M_inv)
     print("time", perf_counter() - start)
     print("sol norm", np.linalg.norm(np.dot(A, x) - b))
