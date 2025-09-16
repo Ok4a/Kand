@@ -56,37 +56,6 @@ def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
         k += 1
 
 
-def CGS(A, b, tol = np.pow(1/10,10)):
-    
-    size = np.size(b)
-    x = np.zeros((size, 1)) # initial starting point
-
-    r = b - A.dot(x)
-    q = np.zeros((size, 1))
-    p = np.zeros((size, 1))
-    rho_old = 1
-    r_tilde = r.copy()
-    k = 0
-    while True:
-        rho_new = r_tilde.T * r
-        beta = rho_new/rho_old
-        u = r +beta*q
-        p = u + beta * (q + beta * p)
-        v = A.dot(p)
-        sigma = r_tilde * v
-        alpha = rho_new/sigma
-        
-        q = u - alpha * v
-        r = r - alpha * A.dot(u + q)
-        if np.linalg.norm(r) < tol or k > size*5: # check if residual is zero
-            print("k =", k, np.linalg.norm(r))
-            return x
-        x=x+alpha*(u+q)
-
-        r_tilde = r
-        rho_old = rho_new
-        k+=1
-
 def randAb(size, l, u):
 
     A = rng.random((size, size)) * (u - l) + l
