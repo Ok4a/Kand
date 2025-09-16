@@ -20,7 +20,7 @@ def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
         return x
     
     if isPrecond:
-        p = np.dot(M_inv, r).copy()
+        p = np.dot(precond, r).copy()
         rr_cur_prod = np.dot(r.T, p)
     else:
         rr_cur_prod = np.dot(r.T, r)
@@ -41,7 +41,7 @@ def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
         
         # if preconditioning
         if isPrecond:
-            Mr = np.dot(M_inv, r) # saves multiplication
+            Mr = np.dot(precond, r) # saves multiplication
             rr_next_prod = np.dot(r.T, Mr)
             beta = rr_next_prod / rr_cur_prod
             p = Mr + beta * p # next search direction
@@ -56,7 +56,7 @@ def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
         k += 1
 
 
-def CGS(A,b,tol= np.pow(1/10,10)):
+def CGS(A, b, tol = np.pow(1/10,10)):
     
     size = np.size(b)
     x = np.zeros((size, 1)) # initial starting point
@@ -87,28 +87,30 @@ def CGS(A,b,tol= np.pow(1/10,10)):
         rho_old = rho_new
         k+=1
 
-def randAb(size, l, u, int = False):
-    if int:
-        A = rng.integers(l,u,size=(size, size))
-        b = rng.integers(l,u,size=(size, 1))
-    else:
-        A = rng.random((size, size)) * (u - l) + l
-        b = rng.random((size,1)) * (u - l) + l
+def randAb(size, l, u):
+
+    A = rng.random((size, size)) * (u - l) + l
+    b = rng.random((size,1)) * (u - l) + l
     return A, b
 
+def GenAb(size):
+    A = np.diag(rng.integers(10, size = size)) - np.eye(size, k = -1) - np.eye(size, k = 1)
+
+    b = rng.random((size,1)) *10
+
+    return A, b
+
+    
 
 if __name__ == "__main__":
-    size = 50
-    A, b = randAb(size, -1, 1)
+    size = 1000
+    # A, b = randAb(size, -1, 1)
+    A, b = GenAb(size)
     A = np.matmul(A, A.T)
+
     M_inv = np.diag(1/np.diag(A))
 
-    if size < 1000:
-        condA = np.linalg.cond(A)
-        condMA = np.linalg.cond(np.dot(M_inv, A))
-        print(size, condA, condMA)
-    else:
-        print(size)
+    print(size)
     print()
 
 
