@@ -78,6 +78,11 @@ def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
     if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
         raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
     
+    if type(precond) == type(None):
+        isPrecond = False
+    else:
+        isPrecond = True
+    
     size = np.size(b)
     x = np.zeros((size, 1)) # initial starting point
     
@@ -85,13 +90,13 @@ def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
     if np.linalg.norm(r) < tol: # check if initial point works
         return x
     
-    if type(precond) == type(None):
-        rr_cur_prod = np.dot(r.T, r)
-        p = r.copy()
-    else:
+    if isPrecond:
         p = np.dot(M_inv, r).copy()
         rr_cur_prod = np.dot(r.T, p)
-
+    else:
+        rr_cur_prod = np.dot(r.T, r)
+        p = r.copy()
+        
     k = 0
     while True:
         Ap_prod = A.dot(p) # saves one matrix vector prod
@@ -106,15 +111,17 @@ def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
             return x
         
         # if preconditioning
-        if type(precond) == type(None):
-            rr_next_prod = np.dot(r.T, r)
-            beta = rr_next_prod / rr_cur_prod
-            p = r + beta * p # next search direction
-        else:
+        if isPrecond:
             Mr = np.dot(M_inv, r)
             rr_next_prod = np.dot(r.T, Mr)
             beta = rr_next_prod / rr_cur_prod
             p = Mr + beta * p # next search direction
+            
+        else:
+            rr_next_prod = np.dot(r.T, r)
+            beta = rr_next_prod / rr_cur_prod
+            p = r + beta * p # next search direction
+            
 
         rr_cur_prod = rr_next_prod
 
@@ -168,19 +175,22 @@ if __name__ == "__main__":
     A = np.matmul(A, A.T)
     M_inv = np.diag(1/np.diag(A))
 
+    print(A)
     condA = np.linalg.cond(A)
     condMA = np.linalg.cond(np.dot(M_inv, A))
     print(size, condA, condMA)
     print()
 
+    tol = np.pow(1/10,5)
+
     start = perf_counter()
-    x = NewCG(A, b)
+    x = NewCG(A, b, tol = tol)
     print("time", perf_counter() - start)
     print("sol norm", np.linalg.norm(np.dot(A, x) - b))
     print()
 
     start = perf_counter()
-    x = NewCG(A, b, M_inv)
+    x = NewCG(A, b, M_inv, tol = tol)
     print("time", perf_counter() - start)
     print("sol norm", np.linalg.norm(np.dot(A, x) - b))
     print()
