@@ -170,7 +170,9 @@ def randAb(size, l, u):
 if __name__ == "__main__":
     size = 500
     A, b = randAb(size, -1, 1)
+    # A = np.diag(range(1,size+1)) + np.diag(range(1,size), k=1)
     A = np.matmul(A, A.T)
+    # print(A)
     M_inv = np.diag(1/np.diag(A))
     # M_inv = np.eye(size, size)
     # M_inv,temp = randAb(size, 0,1) 
