@@ -1,13 +1,13 @@
 import numpy as np
 from time import perf_counter
-from scipy.sparse import csgraph
+import scipy.sparse.linalg as sp
 rng = np.random.default_rng()
 
 def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
     if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
         raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
     
-    if type(precond) == type(None):
+    if precond is None:
         isPrecond = False
     else:
         isPrecond = True
@@ -56,6 +56,42 @@ def NewCG(A, b, precond = None, tol = np.pow(1/10, 10)):
         k += 1
 
 
+def BiCGSTAB(A,b,tol = np.pow(1/10, 10)):
+
+    
+    size = np.size(b)
+    x = np.zeros((size, 1)) # initial starting point
+    
+    r = b - A.dot(x) # residual
+    r_tilde = r.copy()
+    rho = r_tilde.T @ r
+    p = r.copy()
+    k = 0
+    while True:
+        Ap_prod = A.dot(p)
+        alpha = rho /(r_tilde.T @ Ap_prod)
+        h = x + alpha*p
+        s = r-alpha*Ap_prod
+        if np.linalg.norm(s) < tol:
+            print("k =", k, np.linalg.norm(s))
+
+            return h
+        t = A.dot(s)
+        omega = (t.T@s)/(t.T@t)
+        x = h + omega*s
+        r = s - omega*t
+        if np.linalg.norm(r) < tol:
+            print("k =", k, np.linalg.norm(r))
+
+            return x
+        rho_new = r_tilde.T @ r
+        beta = (rho_new/rho)*(alpha/omega)
+        p = r + beta*(p-omega*Ap_prod)
+        rho = rho_new
+
+        k+=1
+
+
 def randAb(size, l, u):
 
     A = rng.random((size, size)) * (u - l) + l
@@ -73,8 +109,8 @@ def GenAb(size):
 
 if __name__ == "__main__":
     size = 1000
-    # A, b = randAb(size, -1, 1)
-    A, b = GenAb(size)
+    A, b = randAb(size, -1, 1)
+    # A, b = GenAb(size)
     A = np.matmul(A, A.T)
 
     M_inv = np.diag(1/np.diag(A))
@@ -86,17 +122,17 @@ if __name__ == "__main__":
     start = perf_counter()
     x = NewCG(A, b)
     print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b))
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b))
     print()
 
     start = perf_counter()
     x = NewCG(A, b, M_inv)
     print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b))
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b))
     print()
 
-    # start = perf_counter()
-    # x = CGS(A, b)
-    # print("time", perf_counter() - start)
-    # print("sol norm", np.linalg.norm(np.dot(A, x) - b))
-    # print()
+    start = perf_counter()
+    x = BiCGSTAB(A, b)
+    print("time", perf_counter() - start)
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b))
+    print()
