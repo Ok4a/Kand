@@ -1,7 +1,7 @@
 import numpy as np
 from time import perf_counter
 import scipy.sparse.linalg as sp
-rng = np.random.default_rng(seed=1)
+rng = np.random.default_rng()
 
 def CG(A, b, precond = None, tol = np.pow(1/10, 10)):
     if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
@@ -80,13 +80,50 @@ def BiCGSTAB(A, b, M_inv = None, tol = np.pow(1/10, 10)):
             print("k =", k, np.linalg.norm(r))
             return x
         rho_next = r_tilde.T @ r
-        beta = (rho_next / rho_prev) * (alpha  / omega)
+        beta = (rho_next / rho_prev) * (alpha / omega)
         p = r + beta * (p - omega * Ap_prod)
 
         rho_prev = rho_next
 
         k+=1
 
+
+def CGS(A, b, M_inv = None, tol = np.pow(1/10,10)):
+    isPrecond = False if M_inv is None else True
+    size = np.size(b)
+    x = np.zeros((size, 1))
+    
+    r = b - A.dot(x)
+    r_hat = r.copy()
+    rho_prev = 1
+    p = np.zeros((size,1))
+    q = np.zeros((size,1))
+    k = 0
+    while True:
+        rho_next = r_hat.T @ r
+
+        beta = rho_next / rho_prev
+
+        u = r + beta * q
+
+        p = u + beta * (q + beta * p)
+
+        y = M_inv.dot(p) if isPrecond else p
+        Ap_prod = A.dot(y)
+
+        alpha = rho_next / (r_hat.T @ Ap_prod)
+
+        q = u - alpha * Ap_prod
+
+        z = M_inv.dot(u + q) if isPrecond else u + q
+
+        r -= alpha*A.dot(z)
+        if np.linalg.norm(r) < tol:
+            print("k =", k, np.linalg.norm(r))
+            return x
+        x += alpha * z
+        rho_prev = rho_next
+        k+=1
 
 def randAb(size, l, u):
 
@@ -111,30 +148,44 @@ if __name__ == "__main__":
 
     M_inv = np.diag(1/np.diag(A))
 
+    print(np.linalg.cond(A), np.linalg.cond(M_inv@A))
     print(size)
     print()
 
-
+    print("CG")
     start = perf_counter()
     x = CG(A, b)
     print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b))
-    print()
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b),"\n")
 
+    print("Precond CG")
     start = perf_counter()
     x = CG(A, b, M_inv)
     print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b))
-    print()
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b),"\n")
 
+    print("BiCGSTAB")
     start = perf_counter()
     x = BiCGSTAB(A, b)
     print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b))
-    print()
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b),"\n")
 
+    print("Precond BiCGSTAB")
     start = perf_counter()
     x = BiCGSTAB(A, b, M_inv)
     print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b))
-    print()
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b),"\n")
+
+    print("CGS")
+    start = perf_counter()
+    x = CGS(A, b)
+    print("time", perf_counter() - start)
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b),"\n")
+
+    print("Precond CGS")
+    start = perf_counter()
+    x = CGS(A, b, M_inv)
+    print("time", perf_counter() - start)
+    print("sol norm", np.linalg.norm(np.dot(A, x) - b), np.allclose(A@x, b),"\n")
+
+
