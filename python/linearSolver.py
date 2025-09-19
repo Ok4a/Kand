@@ -3,14 +3,17 @@ from time import perf_counter
 import scipy.sparse.linalg as sp
 rng = np.random.default_rng()
 
-def _CG(A, b, precond = None, tol = np.pow(1/10, 10)):
+def _CG(A, b, x0 = None, precond = None, tol = np.pow(1/10, 10)):
     if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
         raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
 
     isPrecond = False if precond is None else True
     
     size = np.size(b)
-    x = np.zeros((size, 1)) # initial starting point
+    if x0 is None:
+        x = np.zeros((size, 1)) # initial starting point
+    else:
+        x = x0
     
     r = b - A.dot(x) # residual
     if np.linalg.norm(r) < tol: # check if initial point works
@@ -42,22 +45,26 @@ def _CG(A, b, precond = None, tol = np.pow(1/10, 10)):
 
         k += 1
 
-def CG(A, b, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
+def CG(A, b,x0=None, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
     if verbose:
         print("Method: CG\nSystem dim:", np.size(b))
+        print(f"Is Preconditioned: {'False' if M_inv is None else 'True'}")
         start = perf_counter()
-    x, r, k = _CG(A, b, M_inv, tol)
+    x, r, k = _CG(A, b,x0, M_inv, tol)
     if verbose:
         print("Run time:", perf_counter() - start)
         print("Iter count:", k, "\nResidual norm:",  np.linalg.norm(r))
         print("Sol norm:", np.linalg.norm(np.dot(A, x) - b),"\nAll close:", np.allclose(A.dot(x), b), "\n")
     return x
 
-def _BiCGSTAB(A, b, M_inv = None, tol = np.pow(1/10, 10)):
+def _BiCGSTAB(A, b,x0=None, M_inv = None, tol = np.pow(1/10, 10)):
 
     isPrecond = False if M_inv is None else True
     size = np.size(b)
-    x = np.zeros((size, 1))
+    if x0 is None:
+        x = np.zeros((size, 1)) # initial starting point
+    else:
+        x = x0
     
     r = b - A.dot(x) 
     r_tilde = r.copy()
@@ -96,11 +103,13 @@ def _BiCGSTAB(A, b, M_inv = None, tol = np.pow(1/10, 10)):
 
         k+=1
 
-def BiCGSTAB(A, b, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
+def BiCGSTAB(A, b,x0=None, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
     if verbose:
         print("Method: BiCGSTAB\nSystem dim:", np.size(b))
+
+        print(f"Is Preconditioned: {'False' if M_inv is None else 'True'}")
         start = perf_counter()
-    x, r, k = _BiCGSTAB(A, b, M_inv, tol)
+    x, r, k = _BiCGSTAB(A, b,x0, M_inv, tol)
     if verbose:
         print("Run time:", perf_counter() - start)
         print("Iter count:", k, "\nResidual norm:",  np.linalg.norm(r))
@@ -108,10 +117,13 @@ def BiCGSTAB(A, b, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
     return x
 
 
-def _CGS(A, b, M_inv = None, tol = np.pow(1/10,10)):
+def _CGS(A, b,x0=None, M_inv = None, tol = np.pow(1/10,10)):
     isPrecond = False if M_inv is None else True
     size = np.size(b)
-    x = np.zeros((size, 1))
+    if x0 is None:
+        x = np.zeros((size, 1)) # initial starting point
+    else:
+        x = x0
     
     r = b - A.dot(x)
     r_hat = r.copy()
@@ -144,11 +156,12 @@ def _CGS(A, b, M_inv = None, tol = np.pow(1/10,10)):
         rho_prev = rho_next
         k += 1
 
-def CGS(A, b, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
+def CGS(A, b,x0=None, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
     if verbose:
         print("Method: CGS\nSystem dim:", np.size(b))
+        print(f"Is Preconditioned: {'False' if M_inv is None else 'True'}")
         start = perf_counter()
-    x, r, k = _CGS(A, b, M_inv, tol)
+    x, r, k = _CGS(A, b,x0, M_inv, tol)
     if verbose:
         print("Run time:", perf_counter() - start)
         print("Iter count:", k, "\nResidual norm:",  np.linalg.norm(r))
