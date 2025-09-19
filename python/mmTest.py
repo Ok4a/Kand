@@ -1,13 +1,14 @@
-from linearSolver import runAll
+import linearSolver as ls
+import Precondition as pre
 import numpy as np
 from scipy.io import mmread
 from time import perf_counter
 
-# A = mmread("matrixData/bcsstk17.mtx.gz").toarray()
-A = mmread("matrixData/s1rmq4m1.mtx.gz").toarray()
+A = mmread("matrixData/bcsstk14.mtx.gz").toarray()
+# A = mmread("matrixData/s1rmq4m1.mtx.gz").toarray()
 size = np.shape(A)[0]
-print(size)
 b = np.ones((size,1))
-M_inv = np.diag(1/np.diag(A))
+M_inv = pre.Jacobi(A)
+print(type(M_inv))
 
-runAll(A, b, M_inv)
+# ls.CGS(A,b,M_inv,verbose=True)
