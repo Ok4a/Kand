@@ -1,0 +1,280 @@
+%basics
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+%\usepackage[danish]{babel} %does not work as of now
+\usepackage{hyperref} % url links
+\usepackage{graphicx} %colors
+\usepackage{float} %add stuff for figures like [H]
+\usepackage{booktabs} %adds cooler tables
+\usepackage{enumitem} %better enumerate, itemize and description
+\usepackage[margin=1in]{geometry}
+
+
+
+\usepackage{forest}
+\forestset{
+xlist/.style={
+phantom,
+for children={no edge,replace by={[,append,
+delay={content/.wrap pgfmath arg={}{n()+#1}}
+]}}
+},
+xlist/.default=0
+}
+\forestset{
+    nice empty nodes/.style={
+        for tree={},
+        delay={where content={}{
+            shape=coordinate,
+            for current and siblings={anchor=north}
+        }{}}
+    },
+}
+
+\pdfminorversion=7
+
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+
+\usepackage{tikz} 
+\usetikzlibrary{positioning}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{main}
+\pgfsetlayers{background, main}
+
+\usepackage{emptypage} % Hide page number when page is empty
+\usepackage{subcaption} %subcaptions for figures
+\usepackage{multicol} %add multiple collumns of text, and switch it
+
+
+%math stuff
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+\usepackage{esint}
+% Fancy script capitals
+\usepackage{mathrsfs}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\C{\ensuremath{\mathbb{C}}}
+
+% Easily typeset systems of equations (French package)
+\usepackage{systeme}
+
+% horizontal rule
+\newcommand\hr{
+    \noindent\rule[0.5ex]{\linewidth}{0.5pt}
+}
+
+\usepackage{siunitx}
+
+% Environments
+\makeatother
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{theo}{Theorem}
+\newmdtheoremenv[nobreak=true]{defi}[theo]{Definition}
+\newmdtheoremenv[nobreak=true]{prop}[theo]{Proposition}
+\newmdtheoremenv[nobreak=true]{coro}[theo]{Corollary}
+\newmdtheoremenv[nobreak=true]{lemma}[theo]{Lemma}
+\newmdtheoremenv[nobreak=true]{conj}{Conjecture}
+\newmdtheoremenv[nobreak=true]{axiom}{Axiom}
+\newtheorem{question}{Question}
+\newtheorem{eg}[theo]{Example}
+\newtheorem*{notation}{Notation}
+\newtheorem*{previouslyseen}{As previously seen}
+\newtheorem{remark}[theo]{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{problem}{Problem}
+\newtheorem*{observe}{Observe}
+\newtheorem*{property}{Property}
+\newtheorem*{intuition}{Intuition}
+
+% End example environments with a small diamond (just like proof
+% environments end with a small square)
+\usepackage{etoolbox}
+%\AtEndEnvironment{eg}{\null\hfill$\diamond$}%
+
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+%\numberwithin{theo}{subsection}
+%\numberwithin{defi}{subsection}
+
+
+% Exercise
+% Usage:
+% \exersice{5}
+% \subexercise{1}
+% \subexercise{2}
+% \subexercise{3}
+% gives
+% Exercise 5
+%   Exercise 5.1
+%   Exercise 5.2
+%   Exercise 5.3
+\newcommand{\exercise}[1]{%
+    \def\@exercise{#1}%
+    \subsection*{Exercise #1}
+}
+
+\newcommand{\subexercise}[1]{%
+    \subsubsection*{Exercise \@exercise.#1}
+}
+
+
+
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\vspace{-1.5em}\textsf{#2}}
+}
+
+% These are the fancy headers
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\pagenumbering{arabic}
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[L]{Noah Landergren Falk}
+
+\fancyhead[L]{MM850: 2. Obligatory assignment}
+\fancyhead[C]{}
+\fancyhead[R]{\today}
+%\fancyfoot[R]{\thepage\ of \pageref{P: last}}
+\fancyfoot[L]{} %\leftmark adds a section reference
+\fancyfoot[C]{}
+
+
+
+\makeatother
+
+
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+
+% Usage: 
+% \begin{correction}
+%     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+%     tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+%     vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+%     no sea takimata sanctus est Lorem ipsum dolor sit amet.
+% \end{correction}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+
+
+% Figure support as explained in my blog post.
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+% Fix some stuff
+% %http://tex.stackexchange.com/questions/76273/multiple-pdfs-with-page-group-included-in-a-single-page-warning
+\pdfsuppresswarningpagegroup=1
+
+
+
+%subalign command. Like substack, but allows you to align
+\makeatletter
+\newcommand{\subalign}[1]{%
+  \vcenter{%
+    \Let@ \restore@math@cr \default@tag
+    \baselineskip\fontdimen10 \scriptfont\tw@
+    \advance\baselineskip\fontdimen12 \scriptfont\tw@
+    \lineskip\thr@@\fontdimen8 \scriptfont\thr@@
+    \lineskiplimit\lineskip
+    \ialign{\hfil$\m@th\scriptstyle##$&$\m@th\scriptstyle{}##$\hfil\crcr
+      #1\crcr
+    }%
+  }%
+}
+\makeatother
+
+
+\usepackage{blindtext}
+\usepackage{scrextend}
+\usepackage{enumitem}
+
+\usepackage{tikz-3dplot}
+%\usepackage{pgfplots}
+\usetikzlibrary{patterns}
+\usetikzlibrary{positioning}
+
+\usepackage{setspace}
+\usepackage[style=numeric]{biblatex}
+\addbibresource{ref.bib}
+
+
+%\usepackage[numbib]{tocbibind}
+
+
+\usepackage{tabularx}
+\usepackage{minted}
+\title{MM850: 2. Obligatory assignment}
+\author{Andreas Malthe Hansen (andrh21@student.sdu.dk) \\Morten Møller Jensen (morje21@student.sdu.dk) \\Ole Wolsing Kaa (olkaa21@student.sdu.dk) \\Martina Immerkær Kristensen (martk21@student.sdu.dk) \\Hannah Richardt-Bunke (haric21@student.sdu.dk)}
+
+\numberwithin{equation}{subsection}
+
+\DeclareMathOperator\erf{erf}
+\DeclareMathOperator\erfi{erfi}
+\DeclareMathOperator\Var{Var}
+\DeclareMathOperator\E{E}
+
+\usepackage{titlesec}
+
+%\renewcommand{\theequation}{\arabic{section}.\arabic{subsection}.\Roman{equation}}
+
+\usepackage[labelfont=bf]{caption}
+\usepackage{csvsimple}
+
+
+\renewcommand\thesection{Problem \arabic{section}: }
+\renewcommand\thesubsection{\arabic{section}.\alph{subsection}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+
+
+% For DFA:
+\usetikzlibrary{automata,positioning}
