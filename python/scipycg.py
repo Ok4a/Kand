@@ -2,19 +2,30 @@ import numpy as np
 import scipy.sparse.linalg as sp
 import linearSolver as ls
 from scipy.io import mmread
-import Precondition as ps
+import Precondition as pc
 
 
-A = mmread("matrixData/nos1.mtx.gz").toarray()
+A = mmread("matrixData/conf5.0-00l4x4-1000.mtx.gz").toarray()
+# A = mmread("matrixData/conf5.0-00l4x4-1400.mtx.gz").toarray()
 size = np.shape(A)[0]
 print(size)
-b = np.ones((size, 1))
-M_inv = ps.Jacobi(A)
-x, exit_code = sp.cg(A, b, M = np.eye(size), maxiter = 1000000)
-# print(exit_code)
-print(np.allclose(A.dot(x), b))
-print(np.linalg.norm(A.dot(x) - b))
-print()
 
+b = np.conj(A.T)@np.ones((size, 1))
+
+A = np.conj(A.T)@A
+# A += np.eye(size, dtype=complex)*0.5
+M_inv = pc.Jacobi(A)
+# x, exit_code = sp.bicgstab(A, b, M = M_inv, rtol = np.pow(1/10,10))
+# print(exit_code)
+# print(np.allclose(A.dot(x), b))
+# print(np.linalg.norm(A.dot(x) - b))
+# print()
+
+print(np.linalg.cond(A))
+print(np.linalg.cond(M_inv@A))
+
+ls.CG(A, b, verbose = True)
 ls.CG(A, b, M_inv = M_inv, verbose = True)
-ls.BiCGSTAB(A, b, M_inv = M_inv, verbose = True)
+# ls.BiCGSTAB(A, b, verbose = True)
+# ls.BiCGSTAB(A, b, M_inv = M_inv, verbose = True)
+

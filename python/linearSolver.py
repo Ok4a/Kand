@@ -3,20 +3,21 @@ from time import perf_counter
 import scipy.sparse.linalg as sp
 rng = np.random.default_rng()
 
-def _CG(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10)):
-    if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
-        raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
+def _CG(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10), normalEq = False):
+    # if np.min(np.linalg.eigvals(A)) < 0: #check if A is positive definite
+    #     raise Exception("Matrix not positive definite", np.min(np.linalg.eigvals(A)))
     
     # check if the function has been given a preconditioner
     isPrecond = False if M_inv is None else True
 
-    
+    A = np.conj(A.T) @ A  if normalEq else A
+    b = np.conj(A.T).dot(b) if normalEq else b
     
     # dim of the system
     size = np.size(b)
 
     # creates the starting point if none where given, else starting point is the zero vector
-    x = np.zeros((size, 1)) if x0 is None else x0
+    x = np.zeros((size, 1), dtype=complex) if x0 is None else x0
 
     r = b - A.dot(x) # first residual
     if np.linalg.norm(r) < tol: # check if initial point works
@@ -24,13 +25,12 @@ def _CG(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10)):
     
     p = (M_inv @ r).copy() if isPrecond else r.copy() # first search direction
     
-    rho_prev = np.dot(r.T, p)
-
+    rho_prev = _inner(r, p)
     # iteration counter
     k = 0 
     while True:
         Ap_prod = A.dot(p) # saves one matrix vector prod
-        alpha = rho_prev / (p.T @ Ap_prod)
+        alpha = rho_prev / (_inner(p,Ap_prod))
 
         x += alpha * p # next point
 
@@ -41,22 +41,26 @@ def _CG(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10)):
         
         # calc to make the next search direction conjugate (A-orthogonal) to the previous
         Mr = M_inv @ r if isPrecond else r
-        rho_next = r.T @ Mr
+        rho_next = _inner(r, Mr)
         beta = rho_next / rho_prev
         p = Mr + beta * p # next search direction
 
         rho_prev = rho_next
 
+        # if k % 100 == 0:
+        #     print(k,np.linalg.norm(r))
         k += 1
 
-def CG(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
+def CG(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10), verbose = False, normalEq = False):
     """function to run the CG function, 
     with possibility of printing extra info to the terminal with the verbose bool"""
     if verbose:
         print("Method: CG\nSystem dim:", np.size(b))
+        if normalEq:
+            print("Normal eq: True")
         print(f"Is Preconditioned: {'False' if M_inv is None else 'True'}")
         start = perf_counter()
-    x, r, k = _CG(A, b, x0, M_inv, tol)
+    x, r, k = _CG(A, b, x0, M_inv, tol, normalEq)
     if verbose:
         print("Run time:", perf_counter() - start)
         print("Iter count:", k, "\nResidual norm:",  np.linalg.norm(r))
@@ -72,12 +76,12 @@ def _BiCGSTAB(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10)):
     size = np.size(b)
 
     # creates the starting point if none where given, else starting point is the zero vector
-    x = np.zeros((size, 1)) if x0 is None else x0
+    x = np.zeros((size, 1), dtype=complex) if x0 is None else x0
     
     r = b - A.dot(x) # first residual
     
     r_tilde = r.copy()
-    rho_prev = r_tilde.T @ r
+    rho_prev = _inner(r_tilde, r)
     p = r.copy()
 
     k = 0 # iteration counter
@@ -86,7 +90,7 @@ def _BiCGSTAB(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10)):
 
         Ap_prod = A.dot(p_hat)
 
-        alpha = rho_prev / (r_tilde.T @ Ap_prod)
+        alpha = rho_prev / _inner(r_tilde, Ap_prod)
 
         h = x + alpha * p_hat
         s = r - alpha * Ap_prod
@@ -98,7 +102,7 @@ def _BiCGSTAB(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10)):
 
         t = A.dot(s_hat)
 
-        omega = (t.T @ s) / (t.T @ t)
+        omega = _inner(t, s) / _inner(t, t)
 
         x = h + omega * s_hat
         r = s - omega * t
@@ -106,7 +110,7 @@ def _BiCGSTAB(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10)):
         if np.linalg.norm(r) < tol: # stopping criteria
             return x, r, k
         
-        rho_next = r_tilde.T @ r
+        rho_next = _inner(r_tilde, r)
         beta = (rho_next / rho_prev) * (alpha / omega)
         p = r + beta * (p - omega * Ap_prod)
 
@@ -129,61 +133,8 @@ def BiCGSTAB(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10), verbose = Fa
     return x
 
 
-def _CGS(A, b,x0=None, M_inv = None, tol = np.pow(1/10, 10)):
-    # check if the function has been given a preconditioner
-    isPrecond = False if M_inv is None else True
-    # dim of the system
-    size = np.size(b)
-
-    # creates the starting point if none where given, else starting point is the zero vector
-    x = np.zeros((size, 1)) if x0 is None else x0
-    
-    r = b - A.dot(x)
-    if np.linalg.norm(r) < tol: # check if initial point works
-        return x, r, k
-    r_hat = r.copy()
-    rho_prev = 1
-    p = np.zeros((size,1))
-    q = np.zeros((size,1))
-    k = 0
-    while True:
-        rho_next = r_hat.T @ r
-
-        beta = rho_next / rho_prev
-
-        u = r + beta * q
-
-        p = u + beta * (q + beta * p)
-
-        p_hat = M_inv.dot(p) if isPrecond else p
-        Ap_prod = A.dot(p_hat)
-
-        alpha = rho_next / (r_hat.T @ Ap_prod)
-
-        q = u - alpha * Ap_prod
-
-        z = M_inv.dot(u + q) if isPrecond else u + q
-        x += alpha * z
-        r -= alpha * A.dot(z)
-        if np.linalg.norm(r) < tol: # stopping criteria
-            return x, r, k
-        
-        rho_prev = rho_next
-        k += 1
-
-def CGS(A, b, x0 = None, M_inv = None, tol = np.pow(1/10, 10), verbose = False):
-    """function to run the CGS function, 
-    with possibility of printing extra info to the terminal with the verbose bool"""
-    if verbose:
-        print("Method: CGS\nSystem dim:", np.size(b))
-        print(f"Is Preconditioned: {'False' if M_inv is None else 'True'}")
-        start = perf_counter()
-    x, r, k = _CGS(A, b,x0, M_inv, tol)
-    if verbose:
-        print("Run time:", perf_counter() - start)
-        print("Iter count:", k, "\nResidual norm:",  np.linalg.norm(r))
-        print("Sol norm:", np.linalg.norm(np.dot(A, x) - b),"\nAll close:", np.allclose(A.dot(x), b), "\n")
-    return x
+def _inner(x,y):
+    return np.conj(x.T) @ y
 
 
 def randAb(size, l, u):
@@ -220,18 +171,6 @@ if __name__ == "__main__":
     print("time", perf_counter() - start)
     print("sol norm", np.linalg.norm(np.dot(A, x) - b),np.allclose(A.dot(x),b), "\n")
 
-    print("CGS")
-    start = perf_counter()
-    x = CGS(A, b)
-    print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b),np.allclose(A.dot(x),b), "\n")
-
-    print("Precond CGS")
-    start = perf_counter()
-    x = CGS(A, b, M_inv)
-    print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b),np.allclose(A.dot(x),b), "\n")
-    
     print("BiCGSTAB")
     start = perf_counter()
     x = BiCGSTAB(A, b)
@@ -244,7 +183,3 @@ if __name__ == "__main__":
     print("time", perf_counter() - start)
     print("sol norm", np.linalg.norm(np.dot(A, x) - b),np.allclose(A.dot(x),b), "\n")
 
-    start = perf_counter()
-    x, code = sp.cg(A,b)
-    print("time", perf_counter() - start)
-    print("sol norm", np.linalg.norm(np.dot(A, x) - b),np.allclose(A.dot(x),b), "\n")
