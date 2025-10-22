@@ -1,0 +1,27 @@
+\section{Quadratic form}
+\subsection{Minimizer and symmetric}
+Quadratic form
+\[f(x)=\frac{1}{2}x^TAx-b^Tx\]
+If matrix \(A\) is symmetric and positive definite, \(f(x)\) is minimized by the solution to \(Ax=b\). To minimize \(f(x)\) we find the gradient, 
+
+\[\frac{\partial f(x)}{\partial x}=\frac{1}{2}\frac{\partial x^TAx}{\partial x}-\frac{\partial b^Tx}{\partial x}\]
+
+\[\frac{\partial x^T Ax}{\partial x}=\frac{\partial x}{\partial x}Ax+\frac{\partial x}{\partial x}A^Tx=(A+A^T)x\]
+and
+\[\frac{\partial b^Tx}{\partial x}=b.\]
+Altogether
+\[\frac{\partial f(x)}{\partial x}=\frac{1}{2}(A+A^T)x-b,\]
+meaning it the quadratic form is minimized when \(x\) and \(A\) is symmetric solves \(Ax=b\).
+
+\subsection{Positive definite}
+
+Assume that \(A\) is symmetric and \(x\) satisfies \(Ax=b\) and minimizes the quadratic form, then let \(p\) be some abitrai
+\begin{align*}
+    f(x+p)&=\frac{1}{2}(x+p)^TA(x+p)-b^T(x+p)\\
+    &=\frac{1}{2}(x^TAx+x^TAp+p^TAx+p^TAp)-(b^Tx+b^Tp)\\
+\intertext{By symmetry \(p^TAx=x^TAp\)}
+    &=\frac{1}{2}x^TAx-b^Tx+\frac{1}{2}p^TAp+x^TAp-b^Tp\\
+\intertext{By \(x\) statisfing \(Ax=b\) and of symmetry of \(A\) we have \(x^TA=b^T\), then the two last terms cancel out}
+    &=f(x)+\frac{1}{2}p^TAp
+\end{align*}
+Meaning that \(A\) has to be positive definite, otherwise we have found a vector \(x+p\), where \(p\ne-x\), that either is evaluates the function to a smaller value or the same value as \(f(x)\).
