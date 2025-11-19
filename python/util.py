@@ -1,8 +1,11 @@
 import numpy as np
 rng = np.random.default_rng()
+
 def inner(x,y):
     return np.conj(x.T) @ y
 
+def adj(x):
+    return np.conj(x.T)
 
 def randAb(size, l = 0, u = 1, normal = False):
     A = rng.random((size, size)) * (u - l) + l

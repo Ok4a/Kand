@@ -2,6 +2,7 @@ import numpy as np
 from scipy.sparse import diags
 from scipy.sparse.linalg._interface import LinearOperator
 import scipy.sparse as spar
+import util
 
 def Jacobi(A, invert = True, normalEq = False):
      
@@ -46,15 +47,53 @@ class shift_precondition():
     def Linear(self):
         return LinearOperator(shape=(self.size,self.size), matvec = self.mv)
     
-def shift(A,size, rng = None):
+def shift(size, numOffDiag = 1, rng = None, upper = True):
     if rng is None or type(rng) == int:
         rng = np.random.default_rng(seed = rng)
-    
 
+    if type(numOffDiag) == int:
+        if numOffDiag < size:
+            numOffDiag = range(1, numOffDiag + 1)
+    
+    # alpha = rng.normal(size=size)
+    # beta = rng.normal(scale=0.1,size=size-1)* rng.binomial(1,0.5, size=size-1)
+
+    # beta2 = rng.normal(scale=0.05,size=size-2)* rng.binomial(1,0.25, size=size-2)
+    # gamma = rng.normal()
+
+    # M = np.diag(alpha)
     M = np.eye(size)
-    M += np.diag(rng.normal(size = size - 1), k = 1)
-    M += np.diag(rng.normal(size = 1), k = -size + 1)
-    M += np.diag(rng.normal(size = size - 1), k = -1)
-    M += np.diag(rng.normal(size = 1), k = size - 1)
+    # M = np.diag(rng.uniform(size=size))
+    # M += np.diag(beta,k=1)
+    # M += np.diag(beta,k=-1)
+
+    # M += np.diag(beta2,k=-2)
+    # M += np.diag(beta2,k=2)
+    # # M[size-1,0] = gamma
+    # M[0,size-1] = gamma
+    bound = 0.01
+    # zeroed = rng.uniform(high=0.1)
+    # print(zeroed)
+    # print(zeroed)
+    scale = 0.005
+    for i in numOffDiag:
+        offDiag = rng.normal(scale=scale, size=size-i) #* rng.binomial(1,0.007, size=size-i)
+        # offDiag = rng.uniform(low=-bound, high=bound,size=size-i)#*rng.binomial(1,0.1, size=size-i)
+        # if upper:
+        M += np.diag(offDiag, k = i)
+        # else:
+            # M += np.diag(offDiag, k = -i)
+        # M[0,size-1] = rng.normal(scale=scale)
+
+    return spar.csr_array(M)
+
+
+
+def multiShift(size, numShift, numOffDiag = 1, rng = None):
+
+
+    M = spar.csr_array(np.eye(size))
+    for i in range(numShift):
+        M = shift(size, numOffDiag, rng, upper = True) @ M
+
     return M
-    # return np.eye(size) + np.eye(size, k = 1) + np.eye(size, k = -size + 1)
