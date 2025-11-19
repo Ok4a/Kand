@@ -55,35 +55,18 @@ def shift(size, numOffDiag = 1, rng = None, upper = True):
         if numOffDiag < size:
             numOffDiag = range(1, numOffDiag + 1)
     
-    # alpha = rng.normal(size=size)
-    # beta = rng.normal(scale=0.1,size=size-1)* rng.binomial(1,0.5, size=size-1)
+    scale = 1
 
-    # beta2 = rng.normal(scale=0.05,size=size-2)* rng.binomial(1,0.25, size=size-2)
-    # gamma = rng.normal()
-
-    # M = np.diag(alpha)
     M = np.eye(size)
-    # M = np.diag(rng.uniform(size=size))
-    # M += np.diag(beta,k=1)
-    # M += np.diag(beta,k=-1)
 
-    # M += np.diag(beta2,k=-2)
-    # M += np.diag(beta2,k=2)
-    # # M[size-1,0] = gamma
-    # M[0,size-1] = gamma
     bound = 0.01
-    # zeroed = rng.uniform(high=0.1)
-    # print(zeroed)
-    # print(zeroed)
-    scale = 0.005
     for i in numOffDiag:
-        offDiag = rng.normal(scale=scale, size=size-i) #* rng.binomial(1,0.007, size=size-i)
+        offDiag = rng.normal(scale=scale, size=size-i) #* rng.binomial(1,0.5, size=size-i)
         # offDiag = rng.uniform(low=-bound, high=bound,size=size-i)#*rng.binomial(1,0.1, size=size-i)
-        # if upper:
-        M += np.diag(offDiag, k = i)
-        # else:
-            # M += np.diag(offDiag, k = -i)
-        # M[0,size-1] = rng.normal(scale=scale)
+        if upper:
+            M += np.diag(offDiag, k = i)
+        else:
+            M += np.diag(offDiag, k = -i)
 
     return spar.csr_array(M)
 
