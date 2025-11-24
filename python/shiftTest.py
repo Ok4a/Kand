@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 
 # A = mmread("matrixData/bcsstk01.mtx.gz")
 A = mmread("matrixData/bcspwr03.mtx.gz")
-print(A)
 size = np.shape(A)[0]
 
 b = np.ones((size, 1))
@@ -22,11 +21,11 @@ largestK = 0
 smallestSeed = -1
 largestSeed = -1
 
-numOffDiag = 2
+numOffDiag = 1
 numPrecond = 10
 k_list = []
 
-maxIter = 400
+maxIter = np.inf
 for i in range(1000):
     print(i, end = '\r')
     
@@ -38,7 +37,7 @@ for i in range(1000):
     #     print(i,np.linalg.eigvals(M_inv.toarray()))
     #     # break
     # print((np.linalg.det(M_inv)))
-    _, _, k = ls.BiCGSTAB(A, b, M_inv = M_inv, verbose = False, maxIter= maxIter)
+    _, _, k = ls.BiCGSTAB(A, b, M_inv = M_inv, verbose = False, maxIter = maxIter)
     k_list.append(k)
     if k < smallestK:
         smallestSeed = i
@@ -51,7 +50,6 @@ for i in range(1000):
     #     break
 
 print()
-print(smallestK, smallestSeed)
 
 rng = np.random.default_rng(smallestSeed)
 M_inv = prec.multiShift(size, numShift = numPrecond, numOffDiag = numOffDiag, rng = rng)
@@ -60,10 +58,21 @@ rng = np.random.default_rng(largestSeed)
 M_inv_bad = prec.multiShift(size, numShift = numPrecond, numOffDiag = numOffDiag, rng = rng)
 # print(M_inv)
 # print(np.linalg.eigvals(M_inv.toarray()))
-print("A:",np.linalg.cond(A.toarray()),"\nM_inv@A:",np.linalg.cond(M_inv@A.toarray()),"\nM_inv_bad@A:",np.linalg.cond(M_inv_bad@A.toarray()), "\n")
+print("Condition numbers")
+print("A:", np.linalg.cond(A.toarray()))
+print("M_inv@A:", np.linalg.cond(M_inv@A.toarray()))
+print("M_inv_bad@A:", np.linalg.cond(M_inv_bad@A.toarray()))
+print()
 
-_, r_norm_pre, k = ls.BiCGSTAB(A, b, M_inv = M_inv, verbose = True, maxIter= maxIter)
-_, r_norm_pre_bad, k = ls.BiCGSTAB(A, b, M_inv = M_inv_bad, verbose = True, maxIter= maxIter)
+print("Small Seed", smallestSeed)
+_, r_norm_pre, k = ls.BiCGSTAB(A, b, M_inv = M_inv, verbose = True, maxIter = maxIter)
+
+print("Large Seed", largestSeed)
+_, r_norm_pre_bad, k = ls.BiCGSTAB(A, b, M_inv = M_inv_bad, verbose = True, maxIter = maxIter)
+
+
+
+
 plt.figure(1)
 plt.hist(k_list, bins = 25)
 plt.title(f"Min: {np.min(k_list)}, mean: {np.mean(k_list)}, max: {np.max(k_list)}")
