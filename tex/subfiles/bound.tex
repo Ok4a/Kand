@@ -1,12 +1,17 @@
-\section{Bound for conjugate gradient}
-From CG we know that \(x_i\in x_0+\mathcal{K}^i(A,r_0)\) therefore \(x_i=x_0+Q_{i-1}(A)r_0\), with \(Q_{i-1}\) is a polynomial of degree \(i-1\) with requirement that \(Q_{i-1}(0)=1\) and that 
-    \[r_0=b-Ax_0=Ax-Ax_0=A(x-x_0),\]
-which means that the error, \(e_i=x-x_i\), can be written as  
-    \[x-x_i=x-(x_0+{Q}_{i-1}(A)r_0)=x-(x_0+{Q}_{i-1}(A)A\left(x-x_0\right))=x-(x_0+\tilde{Q}_{i}(A)\left(x-x_0\right))\]
-\[=I(x-x_0)-\tilde{Q}_{i}(A)\left(x-x_0\right)=\left(I-\tilde{Q}_{i}(A)\right)(x-x_0)\]
-This new polynomial \(\tilde{Q}_i\) is equal to zero on input zero, \(\tilde{Q}_i(0)=0\). This means the polynomial \(Q_i(A)=\left(I-\tilde{Q}_{i}(A)\right)\) is equal to 1 on input zero. Therefore the i'th error \(e_i=P_i(A)e_0\).
+\section{Convergence for CG}
+% From CG we know that \(x_i\in x_0+\mathcal{K}^i(A,r_0)\) therefore \(x_i=x_0+Q_{i-1}(A)r_0\), with \(Q_{i-1}\) is a polynomial of degree \(i-1\) with requirement that \(Q_{i-1}(0)=1\) and that 
+%     \[r_0=b-Ax_0=Ax-Ax_0=A(x-x_0),\]
+% which means that the error, \(e_i=x-x_i\), can be written as  
+%     \[x-x_i=x-(x_0+{Q}_{i-1}(A)r_0)=x-(x_0+{Q}_{i-1}(A)A\left(x-x_0\right))\]
+% If we when write \(Q_{i-1}(A)(A)=\tilde{Q}(A)\) as a new polynomial of degree one higher
+%     \[=x-(x_0+\tilde{Q}_{i}(A)\left(x-x_0\right))\]
+% \[=I(x-x_0)-\tilde{Q}_{i}(A)\left(x-x_0\right)=\left(I-\tilde{Q}_{i}(A)\right)(x-x_0)\]
+% This new polynomial \(\tilde{Q}_i\) is equal to zero on input zero, \(\tilde{Q}_i(0)=0\). This means the polynomial \(\left(I-\tilde{Q}_{i}(A)\right)\) is equal to 1 on input zero. Therefore the i'th error \(e_i=P_i(A)e_0\).
 
-As one of the requirements of the matrix \(A\) is that it is SPD, meaning that it has \(n\) non-zero orthogonal eigenvectors \(v_j\), which are scaled to be unit vectors and corresponding eigenvalues \(\lambda_j\), therefore we can write \(e_0\) as a linear compination of these vectors
-    \[e_0=\sum_{j=1}^{n}\gamma_j v_j\]
-which means that
-    \[e_i=P_i(A)\sum_{j=1}^{n}\gamma_j v_j\]
+% As one of the requirements of the matrix \(A\) is that it is SPD, meaning that it has \(n\) non-zero orthogonal eigenvectors \(v_j\), which are scaled to be unit vectors and corresponding eigenvalues \(\lambda_j\), therefore we can write \(e_0\) as a linear combination of these vectors
+%     \[e_0=\sum_{j=1}^{n}\gamma_j v_j\]
+% which means that
+%     \[e_i=P_i(A)\sum_{j=1}^{n}\gamma_j v_j\]
+
+
+% \(\sum\gamma_jv_j=r0=Ae_0=A\sum\xi_jv_j=\sum\xi_j\lambda_jv_j \implies \gamma_j=\xi_j\lambda_j\)
