@@ -5,20 +5,20 @@ import util
 from scipy.io import mmread
 import matplotlib.pyplot as plt
 
-A = mmread("matrixData/steam2.mtx.gz")
+A = mmread("matrixData/ck656.mtx.gz")
 size = np.shape(A)[0]
 
 b = np.ones((size, 1))
 
 _, r_norm_non , startK, flag = ls.BiCGSTAB(A, b, verbose = True)
 
-numCoef = 10
-rng = np.random.default_rng(0)
-# coefList = rng.normal(scale=0.05,size=numCoef)
+numCoef = 8
+rng = np.random.default_rng(1)
+coefList = rng.normal(scale=0.05, size=numCoef)
 start_range = 0.1
 # coefList = rng.uniform(low = -start_range, high = start_range, size = numCoef)
 # coefList = rng.normal(scale = start_range, size = numCoef)
-coefList = np.zeros(numCoef)
+# coefList = np.zeros(numCoef)
 print(coefList)
 print(np.linalg.norm(coefList))
 
@@ -30,18 +30,21 @@ k_list = [bestK]
 ii_list = [0]
 last_change = 0
 step_range = 0.1
-rng = np.random.default_rng()
+# rng = np.random.default_rng()
+
+saveData = [(0, bestK)]
+
 
 iteration_count = 500
-# step_size_change = np.linspace(1,0, iteration_count,endpoint=False, retstep=True)
-# step_size_change = np.geomspace(-0.001,-1, iteration_count)+1
-# step_size_change = np.linspace(1,0.001,iteration_count)
+# step_size_change = np.linspace(1,0, iteration_count, endpoint = False, retstep = True)
+# step_size_change = np.geomspace(-0.001, -1, iteration_count) + 1
+step_size_change = np.linspace(1, 0.001, iteration_count-1)
 for ii in range(1, iteration_count):
     print(bestK, ii, end = '\r')
     index = rng.choice(numCoef) # choose index to change
     # change = rng.normal(scale=lr) # how much the coef will be changed
-    # change = rng.uniform(low = -step_range*step_size_change[ii], high = step_range*step_size_change[ii])
-    change = rng.uniform(low = -step_range, high = step_range)
+    change = rng.uniform(low = -step_range, high = step_range) * step_size_change[ii-1]
+    # change = rng.uniform(low = -step_range, high = step_range)
 
     tempCoef = coefList.copy()
     tempCoef[index] += change
@@ -56,6 +59,7 @@ for ii in range(1, iteration_count):
         k_list.append(k)
         ii_list.append(ii)
         last_change = ii
+        saveData.append((ii,k))
         continue
 
     tempCoef[index] -= 2 * change # try the other direction
@@ -69,9 +73,11 @@ for ii in range(1, iteration_count):
         k_list.append(k)
         ii_list.append(ii)
         last_change = ii
+        saveData.append((ii,k))
         continue
     # coefList[index] += change # go back one iteration
 
+np.savetxt('test.txt', saveData, fmt='%d')
 print(bestK, ii)
 print(coefList)
 print(np.linalg.norm(coefList))
