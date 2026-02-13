@@ -1,5 +1,24 @@
-\section{Iterations methods}
-To solve the system of the form \(Ax=b\), a basic iteration method is solve a system that is similar that is more easily solved, \(Mx_0=b\). Using the solution as an approximation to the original system and a correction, \(A(x_0+z)=b\), we have a new system. Using the same nearby system to solve the new system, \(Az=b-Ax_0\), we get \(Mz_0=b-Ax_0\).
+\subsection{Krylov subspace}
+
+A Krylov subspace \(\mathcal{K}_m(A,v)\) of \(\mathbb{R}^n\) is spanned by the vectors
+    \[\mathcal{K}_m(A,v)\equiv span(v,Av,A^2v,\ldots,A^{m-1}v)\]
 
 
-Meaning we solve the system \(Mx_0=b\) and use \(x_0\) as an approximation of the solution to the original problem. Then
+\begin{algorithm}
+\caption{Arnoldi Iterations \cite{Saad2003}}\label{alg: Arnoldi}
+\begin{algorithmic}
+    \Require Choose \(v_1\) s.t. \(||v_1||=1\)
+
+    \For{\(j=1,2,\ldots,m\)}
+        \For{\(i=1,2,\ldots,j\)}
+            \State \(h_{i,j} \gets (Av_j,v_i)\)
+        \EndFor
+        \State \(w_j \gets Av_j-\sum_{i=1}^{j}h_{i,j}v_i\)
+        \State \(h_{j+1,j}\gets ||w_j||_2\)
+        \If{\(h_{j+1,j}=0\)}
+           \State Stop
+        \EndIf
+        \State\(v_{j+1}\gets\frac{w_j}{h_{j+1,j}}\)
+    \EndFor
+\end{algorithmic}
+\end{algorithm}

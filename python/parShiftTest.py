@@ -50,7 +50,7 @@ for ii in range(1, iteration_count):
     tempCoef[index] += change
     M_inv = prec.parShift(size, tempCoef)
 
-    _, _ , k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = tol, maxIter = bestK + 1)
+    _, _ , k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = tol, max_iter = bestK + 1)
     if k <= bestK and flag == 0: # is it better and did it converge
         
         coefList = tempCoef.copy()
@@ -65,7 +65,7 @@ for ii in range(1, iteration_count):
     tempCoef[index] -= 2 * change # try the other direction
     M_inv = prec.parShift(size,tempCoef)
 
-    _, _ , k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = tol, maxIter = bestK + 1)
+    _, _ , k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = tol, max_iter = bestK + 1)
     if k <= bestK and flag == 0: # is it better and did it converge
         coefList = tempCoef.copy()
         # _, _ , k, flag = ls.BiCGSTAB(A, b,M_inv=M_inv, verbose=True)

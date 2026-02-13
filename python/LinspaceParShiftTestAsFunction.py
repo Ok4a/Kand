@@ -4,7 +4,6 @@ import numpy as np
 import util
 from scipy.io import mmread
 import matplotlib.pyplot as plt
-import winsound
 
 
 def linspaceTest(A_name, seed, step_range, linspace_end,iteration_count, file):
@@ -57,7 +56,7 @@ def linspaceTest(A_name, seed, step_range, linspace_end,iteration_count, file):
         tempCoef[index] += change
         M_inv = prec.parShift(size, tempCoef)
 
-        _, _ , k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = tol, maxIter = bestK + 1)
+        _, _ , k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = tol, max_iter = bestK + 1)
         if k <= bestK and flag == 0: # is it better and did it converge
             
             coefList = tempCoef.copy()
@@ -73,7 +72,7 @@ def linspaceTest(A_name, seed, step_range, linspace_end,iteration_count, file):
         tempCoef[index]-=2*change # try the other direction
         M_inv = prec.parShift(size,tempCoef)
 
-        _, _ , k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = tol, maxIter = bestK + 1)
+        _, _ , k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = tol, max_iter = bestK + 1)
         if k <= bestK and flag == 0: # is it better and did it converge
             coefList = tempCoef.copy()
             # _, _ , k, flag = ls.BiCGSTAB(A, b,M_inv=M_inv, verbose=True)
@@ -93,16 +92,16 @@ def linspaceTest(A_name, seed, step_range, linspace_end,iteration_count, file):
 temp = []
 numSeeds = 1
 step_range = 0.1
-matrix = "matrixData/steam2.mtx.gz"
+matrix = "matrixData/Steam2.mtx.gz"
 iteration_count= 500
 
 with open('test.txt', mode='a') as txt_file:
 
-    txt_file.write(f'Linspace\n')
-    for seed in range(numSeeds):
-        print('Seed:', seed)
-        txt_file.write(f'\nSeed: {seed}\n')
-        temp.append(linspaceTest(A_name=matrix,seed=seed,step_range=step_range,linspace_end=0.001,iteration_count=iteration_count,file=txt_file))
+    # txt_file.write(f'Linspace\n')
+    # for seed in range(numSeeds):
+    #     print('Seed:', seed)
+    #     txt_file.write(f'\nSeed: {seed}\n')
+    #     temp.append(linspaceTest(A_name=matrix,seed=seed,step_range=step_range,linspace_end=0.001,iteration_count=iteration_count,file=txt_file))
 
     txt_file.write(f'\n')
     txt_file.write(f'No scale\n')

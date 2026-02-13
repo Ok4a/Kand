@@ -1,10 +1,10 @@
 import numpy as np
 
-subsize = 5
-I = np.eye(subsize)
-zero = np.zeros((subsize,subsize))
-K = np.block([[zero,I],[I,zero]])
-# print(np.linalg.inv(K))
+rng = np.random.default_rng(0)
+
+A = [[1,2],[3,4],[5,6]]
 
 
-print(K@K)
+print(A)
+
+print(np.mean(A, axis = 0))

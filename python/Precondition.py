@@ -3,6 +3,7 @@ from scipy.sparse import diags
 from scipy.sparse.linalg._interface import LinearOperator
 import scipy.sparse as spar
 import util
+from itertools import islice, cycle
 
 def Jacobi(A, invert = True, normalEq = False):
      
@@ -84,25 +85,19 @@ def randMShift(size, numShift, numOffDiag = 1, rng = None):
 
 
 
-def parShift(size:int, upper_coef:list[int]= [], lower_coef:list[int] = []):
+def parShift(size:int, upper_coef:list[int] = []):
 
     numUCoef = len(upper_coef)
-    numLCoef = len(lower_coef)
 
-    if numUCoef > size - 1 or numLCoef > size-1:
+    if numUCoef > size - 1:
         raise Exception("More coefficients than off diagonal elements")
 
 
-    if len(lower_coef) == 0:
-        return spar.csr_array(np.eye(size) + np.diag(repcoef(size-1,upper_coef,numUCoef),1))
-
-    if len(upper_coef) == 0:
-        return spar.csr_array(np.eye(size) + np.diag(repcoef(size-1,upper_coef,numLCoef),-1))
-
-    return spar.csr_array(np.eye(size) + np.diag(repcoef(size-1,upper_coef,numUCoef),1)+ np.diag(repcoef(size-1,upper_coef,numLCoef),-1))
+    return spar.csr_array(np.eye(size) + np.diag(repCoef(size - 1, upper_coef, numUCoef), 1))
 
 
-def repcoef(len, coef, numCoef):
+
+def repCoef(len, coef, numCoef):
 
     if numCoef == 1:
         temp = np.ones(shape=len)*coef[0]
@@ -115,3 +110,22 @@ def repcoef(len, coef, numCoef):
         offDiag = np.append(offDiag, split[i] * coef[i])
         
     return offDiag
+
+
+def cycleCoef(size, coef):
+
+    return spar.csr_array(np.eye(size) + np.diag(list(islice(cycle(coef), size-1)), 1))
+
+
+
+
+def genInitalParShift(size, numCoef, seed = None, scale = 0.05):
+
+    if type(seed) == 'int' or seed is None:
+        rng = np.random.default_rng(seed)
+    else:
+        rng = seed
+
+    coefList = rng.normal(scale=scale, size=numCoef)
+
+    return coefList, parShift(size, coefList)

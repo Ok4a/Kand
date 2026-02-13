@@ -49,7 +49,7 @@ for i in range(500):
     x0 = rng.normal(size=(size,1))
     # x0 = rng.uniform(low=-bound, high=bound, size=(size,1))
 
-    _, _, k, flag = ls.BiCGSTAB(A, b,x0=x0, M_inv = M_inv, verbose = False, maxIter = maxIter)
+    _, _, k, flag = ls.BiCGSTAB(A, b,x0=x0, M_inv = M_inv, verbose = False, max_iter = maxIter)
     if flag == 0:
         count +=1
         k_list.append(k)
@@ -82,13 +82,13 @@ x0 = rng.normal(size=(size,1))
 # print()
 
 print("Small Seed", smallestSeed)
-_, r_norm_pre, k, flag = ls.BiCGSTAB(A, b,x0=x0, M_inv = None, verbose = True, maxIter = maxIter)
+_, r_norm_pre, k, flag = ls.BiCGSTAB(A, b,x0=x0, M_inv = None, verbose = True, max_iter = maxIter)
 
 rng = np.random.default_rng(largestSeed)
 x0 = rng.normal(size=(size,1))
 # x0 = rng.uniform(low=-bound, high=bound, size=(size,1))
 print("Large Seed", largestSeed)
-_, r_norm_pre_bad, k, flag = ls.BiCGSTAB(A, b,x0=x0, M_inv = M_inv, verbose = True, maxIter = maxIter)
+_, r_norm_pre_bad, k, flag = ls.BiCGSTAB(A, b,x0=x0, M_inv = M_inv, verbose = True, max_iter = maxIter)
 
 print(np.linalg.norm(x0),np.sum(x0))
 

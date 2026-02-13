@@ -42,7 +42,7 @@ for i in range(500):
     #     print(i,np.linalg.eigvals(M_inv.toarray()))
     #     # break
     # print((np.linalg.det(M_inv)))
-    _, _, k, flag = ls.BiCGSTAB(A, b,x0=x0, M_inv = M_inv, verbose = False, maxIter = maxIter)
+    _, _, k, flag = ls.BiCGSTAB(A, b,x0=x0, M_inv = M_inv, verbose = False, max_iter = maxIter)
     if flag == 0:
         count +=1
         k_list.append(k)
@@ -76,12 +76,12 @@ M_inv_bad = prec.randMShift(size, numShift = numPrecond, numOffDiag = numOffDiag
 # print()
 
 print("Small Seed", smallestSeed)
-_, r_norm_pre, k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, verbose = True, maxIter = maxIter)
+_, r_norm_pre, k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv, verbose = True, max_iter = maxIter)
 
 
 
 print("Large Seed", largestSeed)
-_, r_norm_pre_bad, k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv_bad, verbose = True, maxIter = maxIter)
+_, r_norm_pre_bad, k, flag = ls.BiCGSTAB(A, b, M_inv = M_inv_bad, verbose = True, max_iter = maxIter)
 
 
 
