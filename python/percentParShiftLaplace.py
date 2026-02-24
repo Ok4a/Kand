@@ -75,6 +75,7 @@ def laplaceDataML(data, file, config: ConfigParser):
                     sign = betterWorse(new_k_list, k_list)
                 else:
                     sign = {1: config.getint('Data', 'amount'), -1: 0}
+                
 
                 if np.sum(flag_list) < 1: # if all converged  
                     if new_median <= best_median_k and config.get('Learn', 'method') == 'median': # is it better or as good
@@ -117,7 +118,11 @@ def statStr(k_list):
 def betterWorse(new, old):
     sign = np.sign(np.array(old) - np.array(new))
     unique, count = np.unique(sign, return_counts = True)
-    return dict(zip(unique, count))
+    counts = dict(zip(unique, count))
+    for ii in [-1,0,1]:
+        if ii not in counts.keys():
+            counts[ii] = 0
+    return counts
 
 def betterWorseStr(new, old):
     sign = betterWorse(new,old)
@@ -129,11 +134,13 @@ def betterWorseStr(new, old):
 
 if __name__ == '__main__':
 
-    print(argv)
-    config = util.getConfig('config.ini')
-    # config = util.getConfig(argv[1])
+    if len(argv) == 1:
+        file_str = 'test_config.ini'
+    else:
+        file_str = argv[1]
 
 
+    config = util.getConfig(file_str)
 
 
 
@@ -141,14 +148,21 @@ if __name__ == '__main__':
     training_data = genLaplace.genLaplaceData(N = config.getint('Data', '1D_laplace_size'), param = config.getfloatList('Data', 'params'), data_count = config.getint('Data', 'amount'), seed = rng_data)
 
 
+    
 
-
-    with open(f'testData/shift_laplace_{config.get('Learn', 'method')}.txt', mode = 'a') as txt_file:
+    with open(f'testData/shift_laplace_{config.get("Learn", "method")}.txt', mode = 'a') as txt_file:
         txt_file.write(f'\n{datetime.now().strftime("%d/%m/%Y, %H:%M:%S")}\n')
-        # txt_file.write(f'Config file: {argv[1]}')
+        txt_file.write(f'Config file: {file_str}\n')
         
-        # for key in config:
-        #     txt_file.write(f'{key}: {config[key]}\n')
+        
+        for key in config.sections():
+            txt_file.write(f'{key}:\n')
+            for op in config.options(key):
+                txt_file.write(f'\t{op}: {config.get(key, op)}\n')
+
+
+            
+        raise Exception() 
 
         txt_file.write(f'\n')
         txt_file.write('Train:\n')

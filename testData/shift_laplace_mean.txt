@@ -1,0 +1,4 @@
+
+13/02/2026, 14:27:29
+Config file: config/config_mean_1.ini
+Train:
