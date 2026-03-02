@@ -1,10 +1,10 @@
 from itertools import product
-seeds = range(4,7)
 
 # [Data]
 D_laplace_size = 45
 amount = 250
 params = '1 0.3'
+seeds = range(5,7)
 # seed = 5
 # dim =
 
@@ -16,12 +16,13 @@ max_iteration = None
 iteration_count = 100
 step_range = 0.1
 methods = ['sign','mean', 'median']
-methods = ['sign']
+# methods = ['sign']
 # seed = 5
 scale = '1 0.5 0.25'
 
 # [Precondition]
 num_coef = 10
+precond_type = 'par_shift'
 
 
 
@@ -49,3 +50,4 @@ for method, seed in product(methods, seeds):
 
         config_file.write(f'\n\n[Precondition]')
         config_file.write(f'\nnum_coef = {num_coef}')
+        config_file.write(f'\ntype = {precond_type}')

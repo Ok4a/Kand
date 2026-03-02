@@ -1,0 +1,25 @@
+
+02/03/2026, 12:18:54
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 10
+	amount: 10
+	params: 1 0.3
+	seed: 2
+	dim: 100
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 20
+	step_range: 0.1
+	method: sign
+	seed: 2
+	scale: 1 0.5 0.25
+Precondition:
+	num_coef: 10
+	type: par_shift_jacobi
+
+Train:
+(0, 1): Mean: 51.4, median: 44.5, std: 15.558, percent: 52.18, B: 10, W: 0, 
+	(43, 40, 69, 46, 62, 82, 33, 38, 63, 38)

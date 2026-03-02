@@ -78,76 +78,103 @@ def loadAll(files,lines_list, order):
 
 
 if __name__ == '__main__':
-    file_names = ['SaveData/shift_laplace_sign.txt', 'SaveData/shift_laplace_median.txt', 'SaveData/shift_laplace_mean.txt']
+    file_names = ['SaveData/shift_laplace_sign.txt', 'SaveData/shift_laplace_median.txt', 'SaveData/shift_laplace_mean.txt', 'SaveData/shift_laplace_jacobi.txt']
 
     lines_list = []
     lines_list.append({'test': [137,290,426,586,738,884,1040], 'train': [23,168,320,457,616,768,914] })
     lines_list.append({'test': [48,90,136,174], 'train': [23,78,120,166]})
     lines_list.append({'test': [93,153,229,311], 'train': [74,123,183,259]})
+    lines_list.append({'test': [5,15,25,35,45,55,65], 'train': []})
 
-    order = ['sign', 'median', 'mean']
+    order = ['sign', 'median', 'mean', 'jacobi']
 
     all_lines = loadAll(file_names, lines_list, order)
 
-    k = 1
-    line_type = 'train'
-    data_type = 'stat'
-
-
-    # for seed in range(len(lines_list[k][line_type])):
-    #     lines = all_lines[order[k]][line_type][data_type][seed]
-    #     # lines = loadstatLines(file_names[k], lines_list[k][line_type][ii], line_type = line_type)
-    #     # print(lines[0])
-    #     plt.figure(123+seed)
-    #     if line_type == 'train':
-    #         plt.plot(lines['iter1'],lines['mean'], label = f'mean: {seed}')
-    #         plt.plot(lines['iter1'], lines['median'], label = f'median: {seed}')
-    #     else:
-    #         plt.plot(lines['mean'], label = f'mean: {seed}')
-    #         plt.plot(lines['median'], label = f'median: {seed}')
-        
-        
-    #     plt.title(f'Improve func: {order[k]}')
-
-    #     plt.legend()
+    # # # mean and median change in training or testing
+    # line_type = 'train'
+    # data_type = 'stat'
+    # c = ['m','b','g','c','k','y', 'r']
+    # # fig = plt.figure(60)
+    # fig, axs = plt.subplots(3,1)
+    # fig.suptitle('Improvement in training')
     
+    # for k in range(3):
+    #     for seed in range(4):
+    #         lines = all_lines[order[k]][line_type][data_type][seed]
+    #         if line_type == 'train':
+    #             axs[k].plot(lines['iter1'],lines['mean'], label = f'mean: {seed}', linestyle='-', color=c[seed])
+    #             axs[k].plot(lines['iter1'], lines['median'], label = f'median: {seed}', linestyle='--', color=c[seed])
+    #         else:
+    #             axs[k].plot(lines['mean'], label = f'mean: {seed}', linestyle='-', color=c[seed])
+    #             axs[k].plot(lines['median'], label = f'median: {seed}', linestyle='--', color=c[seed])
+    #         axs[k].set_title(f'Improvement func: {order[k]}')
+    #         axs[k].legend()
+    
+    # axs[k].set_xlabel('Iteration count')
 
 
+    # # mean and median change in training or testing
     line_type = 'test'
     data_type = 'stat'
-    # for seed in range(len(lines_list[k][line_type])):
-    #     plt.figure(seed)
-    #     non = all_lines[order[k]][line_type]['iter'][seed][0]
-    #     pre = all_lines[order[k]][line_type]['iter'][seed][1]
+    c = ['m','b','g','c','k','y', 'r']
+    # fig = plt.figure(60)
+    fig, axs = plt.subplots(2,2)
+    fig.suptitle('Improvement in Testing')
+    temp = [(0,0),(0,1),(1,0),(1,1)]
+    
+    for k in range(4):
+        for seed in range(4):
+            lines = all_lines[order[k]][line_type][data_type][seed]
+            axs[temp[seed]].plot(lines['mean'], label = f'{order[k]}', linestyle='-', color=c[k])
+            axs[temp[seed]].plot(lines['median'], label = f'{order[k]}', linestyle='--', color=c[k])
+            axs[temp[seed]].set_title(f'Seed {seed}')
+            axs[temp[seed]].set_xticks([0,1],['non','pre'])
+    li, lab = fig.axes[0].get_legend_handles_labels()
+    fig.legend(li, lab, loc='center right')
+    fig.text(0.02, 0.34, 'Solver iteration count', rotation='vertical')
 
-    #     n1 ,_,_ = plt.hist([non,pre],bins=40, alpha = 0.5, label=['Non','pre'], color=['red','blue'])
+    # # density plots
+    # line_type = 'test'
+    # data_type = 'stat'
+    # for k in range(4):
+    #     fig, axs = plt.subplots(2,2)
+    #     fig.suptitle(f'Density of testing iterations with improve func: {order[k]}')
+    #     # for seed in range(len(lines_list[k][line_type])):
+    #     temp = [(0,0),(0,1),(1,0),(1,1)]
+    #     for seed in range(4):
+    #         # plt.figure(seed)
+    #         non = all_lines[order[k]][line_type]['iter'][seed][0]
+    #         pre = all_lines[order[k]][line_type]['iter'][seed][1]
+    #         print(k,seed, max(pre))
 
-    #     # plt.vlines(stat_lines['mean'][0],ymin=0,ymax=ymax, label='mean Non', colors='red')
-    #     # plt.vlines(stat_lines['mean'][1],ymin=0,ymax=ymax, label='mean final', colors='blue')
-    #     # plt.vlines(stat_lines['median'][0],ymin=0,ymax=ymax, label='median Non', colors='red', linestyles='dashed')
-    #     # plt.vlines(stat_lines['median'][1],ymin=0,ymax=ymax, label='median final', colors='blue', linestyles='dashed')
-    #     plt.legend()
+    #         n1 ,_,_ = axs[temp[seed]].hist([non,pre],bins=40, alpha = 1, label=['Non','precond'], color=['c','m'])
 
-    #     # plt.figure(ii+10)
-    #     # plt.boxplot((iter_lines[0],iter_lines[1]),orientation='horizontal',tick_labels=['non', 'final'],meanline=True, positions=[5,8], widths=1.5)
+    #         # axs[temp[seed]].boxplot((non,pre),orientation='horizontal',tick_labels=['non', 'Precond'],showmeans=True, positions=[5,8], widths=1.5)
+    #         axs[temp[seed]].legend()
+    #         axs[temp[seed]].set_title(f'Seed: {seed}')
 
 
-    line_type = 'test'
-    b = []
-    labels = []
-    for k in range(len(order)):
-        for seed in range(len(all_lines[order[k]][line_type]['stat'])):
-        # for seed in range(4):
-            b.append(all_lines[order[k]][line_type]['stat'][seed]['b'][0])
-            labels.append(f'{order[k]}: {seed}')
+
+    # # How many are better bar plot
+    # line_type = 'test'
+    # b = []
+    # labels = []
+    # for k in range(len(order)):
+    #     for seed in range(len(all_lines[order[k]][line_type]['stat'])):
+    #     # for seed in range(4):
+    #         b.append(all_lines[order[k]][line_type]['stat'][seed]['b'][0])
+    #         labels.append(f'{order[k]}: {seed}')
     
 
-    plt.figure(42)
-    c = ['m','b','g','c','k','k','k','m','b','g','c','m','b','g','c']
-    plt.bar(labels,b,color=c)
-    plt.xticks(rotation=-45)
-    plt.hlines(125,0,14, colors='k')
-    plt.title('How many that are better in testing')
+    # plt.figure(42)
+    # c = ['m','b','g','c','k','k','k','m','b','g','c','m','b','g','c']
+    # plt.bar(labels,b,color=c)
+    # plt.xticks(rotation=-45)
+    # plt.axhline(len(all_lines[order[k]][line_type]['iter'][0][0])/2,color='k',label='half')
+    # plt.legend()
+    # plt.title('How many that are better in testing')
+
+
 
 
     plt.show()
