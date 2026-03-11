@@ -13,7 +13,7 @@ from configparser import ConfigParser
 
 ebutton = mp.Event()
 
-def runBiCGStab(A,b,M_inv, config:ConfigParser, stop_futher = True):
+def runBiCGStab(A,b,M_inv, config:ConfigParser, stop_futher = True, other = None):
     np.seterr(all = 'raise')
 
     try:
@@ -23,23 +23,26 @@ def runBiCGStab(A,b,M_inv, config:ConfigParser, stop_futher = True):
         precond_type = config.get('Precondition', 'type')
         if M_inv is None:
             pass
+        elif other == 'jacobi':
+            M_inv = prec.Jacobi(A)
         elif precond_type.lower() == 'par_shift':
             M_inv = sparse.eye(config.getint('Data', 'dim')) + M_inv
         elif precond_type.lower() == 'par_shift_jacobi':
             M_inv = prec.Jacobi(A) + M_inv
+        
 
         if b is None:
             b = np.ones((config.getint('Data', 'dim'),1 ))
 
 
-        _,_,k,flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = config.getfloat('Solver', 'tol'), max_iter=config.getintOrNone('Solver', 'max_iteration'))
+        _,_,k,flag = ls.BiCGSTAB(A, b, M_inv = M_inv, tol = config.getfloat('Solver', 'tol'), max_iter = config.getintOrNone('Solver', 'max_iteration'), extra_stop = (ebutton, stop_futher))
 
 
         if flag == 2:
             ebutton.set()
         return k, flag
     
-    except:
+    except FloatingPointError:
         ebutton.set()
         return -1, 3
 
@@ -180,24 +183,30 @@ if __name__ == '__main__':
         txt_file.write(f'No precond: {util.statStr(non_precond_k_list)}, flag: {np.sum(non_pre_flag_list)} \n\t{non_precond_k_list}\n\n')
         ebutton.clear()
 
-
+        
         pool = mp.Pool()
-        M_inv = prec.parShift(config.getint('Data', 'dim'), [0])
-        jacobi_k_list, jacobi_flag_list = zip(*pool.starmap(runBiCGStab, [(A, None, [0], config, False) for A in test_data]))
-        txt_file.write(f'Jacobi: {util.statStr(jacobi_k_list)}, flag: {np.sum(jacobi_flag_list)} \n\t{jacobi_k_list}\n\n')
-        ebutton.clear()
-
-
-        pool = mp.Pool()
-        M_inv = prec.parShift(config.getint('Data', 'dim'), coef_list)
+        M_inv = prec.parShiftOff(config.getint('Data', 'dim'), coef_list)
         final_k_list, final_flag_list = zip(*pool.starmap(runBiCGStab, [(A, None, M_inv, config, False) for A in test_data]))
         ebutton.clear()
         
 
-        sign_non = util.betterWorse(final_k_list, non_precond_k_list)
-        sign_jacobi = util.betterWorse(final_k_list, jacobi_k_list)
+        config.set('Precondition', 'type', 'par_shift_jacobi')
+        pool = mp.Pool()
+        M_inv = prec.parShiftOff(config.getint('Data', 'dim'), [0])
+        jacobi_k_list, jacobi_flag_list = zip(*pool.starmap(runBiCGStab, [(A, None, M_inv, config, False) for A in test_data]))
+        ebutton.clear()
+        
+        sign_JvN = util.betterWorse(jacobi_k_list, non_precond_k_list)
 
-        txt_file.write(f'Last: {util.statStr(final_k_list)}, BvN: {sign_non[1]}, WvN: {sign_non[-1]}, BvJ: {sign_jacobi[1]}, WvJ: {sign_jacobi[-1]}, flag: {np.sum(final_flag_list)} \n\t{final_k_list}\n')
+        
+        txt_file.write(f'Jacobi: {util.statStr(jacobi_k_list)},, BvN: {sign_JvN[1]}, WvN: {sign_JvN[-1]}, flag: {np.sum(jacobi_flag_list)} \n\t{jacobi_k_list}\n\n')
+
+
+
+        sign_PvN = util.betterWorse(final_k_list, non_precond_k_list)
+        sign_PvJ = util.betterWorse(final_k_list, jacobi_k_list)
+
+        txt_file.write(f'Last: {util.statStr(final_k_list)}, BvN: {sign_PvN[1]}, WvN: {sign_PvN[-1]}, BvJ: {sign_PvJ[1]}, WvJ: {sign_PvJ[-1]}, flag: {np.sum(final_flag_list)} \n\t{final_k_list}\n')
         # txt_file.write(f'Last: {util.statStr(final_k_list)}, B: {sign[1]}, W: {sign[-1]}, flag: {np.sum(final_flag_list)} \n\t{final_k_list}\n')
 
             

@@ -84,7 +84,7 @@ def CG(A, b, x0 = None, M_inv = None, tol = 1e-10, verbose = False, normal_eq = 
     return x, r_norm, k
 
 
-def _BiCGSTAB(A, b, x0 = None, M_inv = None, tol = 1e-10, max_iter = None):
+def _BiCGSTAB(A, b, x0 = None, M_inv = None, tol = 1e-10, max_iter = None, extra_stop = (None, False)):
 
     # check if the function has been given a preconditioner
     is_precond = False if M_inv is None else True
@@ -111,10 +111,13 @@ def _BiCGSTAB(A, b, x0 = None, M_inv = None, tol = 1e-10, max_iter = None):
 
     k = 0 # iteration counter
     while k < max_iter:
+        if extra_stop[0] is not None:
+            if extra_stop[0].is_set() and extra_stop[1]:
+                return 0, 0, -1, 4
 
-        p_hat = M_inv@p if is_precond else p
+        p_hat = M_inv @ p if is_precond else p
 
-        Ap_prod = A@p_hat
+        Ap_prod = A @ p_hat
 
         temp = inner(r_tilde, Ap_prod)
         if temp == 0:
@@ -158,14 +161,14 @@ def _BiCGSTAB(A, b, x0 = None, M_inv = None, tol = 1e-10, max_iter = None):
         flag = 1
     return x, (r_norm, s_norm), k, flag
 
-def BiCGSTAB(A, b, x0 = None, M_inv = None, tol = 1e-10, verbose = False, max_iter = None):
+def BiCGSTAB(A, b, x0 = None, M_inv = None, tol = 1e-10, verbose = False, max_iter = None, extra_stop = (None, False)):
     """function to run the BiCGSTAB function, 
     with possibility of printing extra info to the terminal with the verbose bool"""
     if verbose:
         print("Method: BiCGSTAB\nSystem dim:", np.size(b))
         print(f"Is Preconditioned: {'False' if M_inv is None else 'True'}")
         start = perf_counter()
-    x, r_norm, k, flag = _BiCGSTAB(A, b, x0, M_inv = M_inv, tol = tol, max_iter = max_iter)
+    x, r_norm, k, flag = _BiCGSTAB(A, b, x0, M_inv = M_inv, tol = tol, max_iter = max_iter, extra_stop=extra_stop)
     if verbose:
         print("Run time:", perf_counter() - start)
         print("Iter count:", k, "\nResidual norm:",  r_norm[0][-1],"\nResidual norm:",  r_norm[1][-1])

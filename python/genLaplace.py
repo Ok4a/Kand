@@ -58,58 +58,59 @@ def genLaplaceData(N, param = [1, 0.4], data_count=10, seed = None, dist_type = 
 if __name__ == '__main__':
 
     N = 30
-    # laplace = gen2dLaplace(N)
+    laplace = gen2dLaplace(N)
+    print(laplace.format)
 
-    # np.set_printoptions(linewidth = 150, precision = 4)
-    # print(laplace.toarray())
+    np.set_printoptions(linewidth = 150, precision = 4)
+    print(laplace.toarray())
 
-    # dense = laplace.toarray()
-    # print('Cond:', np.linalg.cond(dense))
-    # _, __, k, _ = LS.BiCGSTAB(laplace, np.ones(shape = (N * N, 1)), verbose = True)
-    # dense[dense == 0.0] = np.nan
-
-    # plt.figure(1)
-    # plt.spy(dense)
-    # # plt.spy(laplace, color = 'black')
-
-    # plt.figure(2)
-    # plt.imshow(dense)
-    # plt.show()
-
-
-    k_list = []
-    cond_list = []
-    for i in range(500):
-        print(i, end = '\r')
-        laplace = gen2dLaplace(N)
-        _, __, k, _ = LS.BiCGSTAB(laplace, np.ones(shape = (N * N, 1)), verbose = False)
-        cond_list.append(np.linalg.cond(laplace.toarray()))
-
-        k_list.append(k)
-
-
-
-    print('Dim:', N * N)
-    print('Iter')
-    print('Mean:', np.mean(k_list))
-    print('Median:', np.median(k_list))
-    print('Var:', np.var(k_list))
-    print('Std:', np.std(k_list))
-    print('Min:', np.min(k_list))
-    print('Max:', np.max(k_list))
-
-
-    print('Cond')
-    print('Mean:', np.mean(cond_list))
-    print('Median:', np.median(cond_list))
-    print('Var:', np.var(cond_list))
-    print('Std:', np.std(cond_list))
-    print('Min:', np.min(cond_list))
-    print('Max:', np.max(cond_list))
+    dense = laplace.toarray()
+    print('Cond:', np.linalg.cond(dense))
+    _, __, k, _ = LS.BiCGSTAB(laplace, np.ones(shape = (N * N, 1)), verbose = True)
+    dense[dense == 0.0] = np.nan
 
     plt.figure(1)
-    plt.hist(k_list, bins = 40)
+    plt.spy(dense)
+    # plt.spy(laplace, color = 'black')
+
     plt.figure(2)
-    plt.hist(cond_list, bins = 40)
+    plt.imshow(dense)
     plt.show()
+
+
+    # k_list = []
+    # cond_list = []
+    # for i in range(500):
+    #     print(i, end = '\r')
+    #     laplace = gen2dLaplace(N)
+    #     _, __, k, _ = LS.BiCGSTAB(laplace, np.ones(shape = (N * N, 1)), verbose = False)
+    #     cond_list.append(np.linalg.cond(laplace.toarray()))
+
+    #     k_list.append(k)
+
+
+
+    # print('Dim:', N * N)
+    # print('Iter')
+    # print('Mean:', np.mean(k_list))
+    # print('Median:', np.median(k_list))
+    # print('Var:', np.var(k_list))
+    # print('Std:', np.std(k_list))
+    # print('Min:', np.min(k_list))
+    # print('Max:', np.max(k_list))
+
+
+    # print('Cond')
+    # print('Mean:', np.mean(cond_list))
+    # print('Median:', np.median(cond_list))
+    # print('Var:', np.var(cond_list))
+    # print('Std:', np.std(cond_list))
+    # print('Min:', np.min(cond_list))
+    # print('Max:', np.max(cond_list))
+
+    # plt.figure(1)
+    # plt.hist(k_list, bins = 40)
+    # plt.figure(2)
+    # plt.hist(cond_list, bins = 40)
+    # plt.show()
 
