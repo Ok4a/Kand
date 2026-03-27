@@ -26,11 +26,14 @@ def GenAb(size):
 
 
 def getConfig(file_name: str):
-    config_file = ConfigParser(converters={'intOrNone': intOrNone, 'floatList': floatList, 'precondFunction': PrecondFunction})
+    config_file = ConfigParser(converters={'intOrNone': intOrNone, 'floatList': floatList, 'precondFunction': PrecondFunction, 'intList': intList})
     config_file.read(file_name)
 
     config_file['Data']['dim'] = str(config_file.getint('Data', '1D_laplace_size')*config_file.getint('Data', '1D_laplace_size'))
-
+    
+    if len(config_file.getintList('Precondition', 'par_list')) != len(config_file.getintList('Precondition', 'super_list')):
+        raise Exception(f'par_list, {len(config_file.getintList('Precondition', 'par_list'))}, and super_list, {len(config_file.getintList('Precondition', 'super_list'))}, not of equal size')
+    
     return config_file
 
 def intOrNone(s:str):
@@ -38,7 +41,8 @@ def intOrNone(s:str):
     
 def floatList(s:str):
     return [float(x) for x in s.split(' ')]
-
+def intList(s:str):
+    return [int(x) for x in s.split(' ')]
 
 
 def PrecondFunction(precond_type: str):

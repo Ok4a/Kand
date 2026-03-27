@@ -4,20 +4,32 @@ import re
 from collections import defaultdict
 
 
-def loadIterLines(file:str, line_num, line_type = 'Test'):
-    lines = []
+def loadIterLines(file:str, line_num, line_type = 'test'):
+    if line_type.lower() == 'test':
+        lines = {}
+    else:
+        lines = []
+    break_next = False
+    prev_line = ''
     with open(file, mode='r') as file:
         for line_no, line in enumerate(file):
-            if line_type.lower() == 'test' and line_no+1 in [line_num+2, line_num+5]:
-                lines.append(np.array([int(x) for x in line[2:-2].split(', ')]))
-                if len(lines) == 2:
+            
+            if line_type.lower() == 'test' and line_no+1 > line_num:
+                if line[-2:-1] == ')':
+                    line_key = prev_line.split(':')[0].lower()
+                    lines[line_key] = np.array([int(x) for x in line[2:-2].split(', ')])
+                if break_next:
                     break
+                if line[0] == '[':
+                    break_next = True
+
+                    
             elif line_type.lower() == 'train' and line_no >= line_num:
                 if line[0] == '	':
                     lines.append(np.array([int(x) for x in line[2:-2].split(', ')]))
                 elif line[0:4] == 'Test':
                     break
-
+            prev_line = line
 
     return lines
 
@@ -25,25 +37,32 @@ def loadIterLines(file:str, line_num, line_type = 'Test'):
 
 
 def loadstatLines(file:str, line_num, line_type = 'test'):
-    
-    
-    lines = defaultdict(list)
 
-    with open(file, mode='r') as file:
+    if line_type.lower() == 'test':
+        lines = defaultdict(dict)
+    elif line_type.lower() == 'train':
+    
+        lines = defaultdict(list)
+    else:
+        raise Exception('Incorrect line type')
+
+    with open(file, mode = 'r') as file:
         for line_no, line in enumerate(file):
 
+            if line_type.lower() == 'test' and line_no + 1 > line_num:
+                if line[0] == '[':
+                    break
+                elif line[0:6] in ['No pre', 'Jacobi', 'Last: ','Best: ']:
+                    split_line = re.split(': |, | \n', line)
+                    for i in range(len(split_line)):
+                        try:
+                            value = float(split_line[i])
+                            lines[split_line[i-1].lower()][split_line[0].lower()] = value
 
-            if line_type.lower() == 'test' and line_no+1 in [line_num+1, line_num+4, line_num+7]:
-                split_line = re.split(': |, | \n', line)
-                for i in range(len(split_line)):
-                    try:
-                        value = float(split_line[i])
-                        lines[split_line[i-1].lower()].append(value)
+                        except:
+                            pass
 
-                    except:
-                        pass
-
-                    
+                        
                    
 
 
@@ -63,8 +82,8 @@ def loadstatLines(file:str, line_num, line_type = 'test'):
 def loadLines(file,line_nums,line_type):
     lines={'stat':[], 'iter':[]}
     for ii in line_nums:
-        lines['stat'].append(loadstatLines(file,ii,line_type))
-        lines['iter'].append(loadIterLines(file,ii,line_type))
+        lines['stat'].append(loadstatLines(file, ii, line_type))
+        lines['iter'].append(loadIterLines(file, ii, line_type))
     return lines
 
 
@@ -91,7 +110,7 @@ if __name__ == '__main__':
     lines_list.append({'test': [48,90,136,174], 'train': [23,78,120,166]})
     lines_list.append({'test': [93,153,229,311], 'train': [74,123,183,259]})
     lines_list.append({'test': [5,15,25,35,45,55,65], 'train': []})
-    lines_list.append({'test': [102,211,363,530], 'train': [22,135,245,398]})
+    lines_list.append({'test': [102,211,363,530,810], 'train': [22,135,245,398,564]})
 
     order = ['sign', 'median', 'mean', 'jacobi', 'sign_jacobi_shift']
 
@@ -110,7 +129,7 @@ if __name__ == '__main__':
     g = [0,1,2,4]
     for i_k in range(4):
         k = g[i_k]
-        for seed in range(4):
+        for seed in range(len(all_lines[order[k]][line_type][data_type])):
             lines = all_lines[order[k]][line_type][data_type][seed]
             if line_type == 'train':
                 axs[temp[i_k]].plot(lines['iter1'],lines['mean'], label = f'mean: {seed}', linestyle='-', color=c[seed])
@@ -138,11 +157,11 @@ if __name__ == '__main__':
         for seed in range(4):
             lines = all_lines[order[k]][line_type][data_type][seed]
             if len(lines['mean']) == 3:
-                axs[temp[seed]].plot(lines['mean'][::2], label = f'{order[k]}', linestyle='-', color=c[k])
-                axs[temp[seed]].plot(lines['median'][::2], label = f'{order[k]}', linestyle='--', color=c[k])
+                axs[temp[seed]].plot(lines['mean'].values(), label = f'{order[k]}', linestyle='-', color=c[k])
+                axs[temp[seed]].plot(lines['median'].values(), label = f'{order[k]}', linestyle='--', color=c[k])
             else:
-                axs[temp[seed]].plot(lines['mean'], label = f'{order[k]}', linestyle='-', color=c[k])
-                axs[temp[seed]].plot(lines['median'], label = f'{order[k]}', linestyle='--', color=c[k])
+                axs[temp[seed]].plot(lines['mean'].values(), label = f'{order[k]}', linestyle='-', color=c[k])
+                axs[temp[seed]].plot(lines['median'].values(), label = f'{order[k]}', linestyle='--', color=c[k])
             axs[temp[seed]].set_title(f'Seed {seed}')
             axs[temp[seed]].set_xticks([0,1],['non','pre'])
     li, lab = fig.axes[0].get_legend_handles_labels()
@@ -159,8 +178,8 @@ if __name__ == '__main__':
         temp = [(0,0),(0,1),(1,0),(1,1)]
         for seed in range(4):
             # plt.figure(seed)
-            non = all_lines[order[k]][line_type]['iter'][seed][0]
-            pre = all_lines[order[k]][line_type]['iter'][seed][1]
+            non = all_lines[order[k]][line_type]['iter'][seed]['no precond']
+            pre = all_lines[order[k]][line_type]['iter'][seed]['last']
 
             n1 ,_,_ = axs[temp[seed]].hist([non,pre],bins=40, alpha = 1, label=['Non','precond'], color=['c','m'])
 
@@ -178,9 +197,9 @@ if __name__ == '__main__':
         # for seed in range(len(all_lines[order[k]][line_type]['stat'])):
         for seed in range(4):
             try:
-                b.append(all_lines[order[k]][line_type]['stat'][seed]['b'][0])
+                b.append(all_lines[order[k]][line_type]['stat'][seed]['b']['last'])
             except:
-                b.append(all_lines[order[k]][line_type]['stat'][seed]['bvn'][1])
+                b.append(all_lines[order[k]][line_type]['stat'][seed]['bvn']['last'])
 
             labels.append(f'{order[k]}: {seed}')
     
@@ -190,8 +209,8 @@ if __name__ == '__main__':
     c = ['m','b','g','c']
     plt.bar(labels,b,color=c)
     plt.xticks(rotation=-45)
-    plt.axhline(len(all_lines[order[k]][line_type]['iter'][0][0]),color='k',linestyle='-',label='all')
-    plt.axhline(len(all_lines[order[k]][line_type]['iter'][0][0])/2,color='k',linestyle='--',label='half')
+    plt.axhline(len(all_lines[order[k]][line_type]['iter'][0]['no precond']),color='k',linestyle='-',label='all')
+    plt.axhline(len(all_lines[order[k]][line_type]['iter'][0]['no precond'])/2,color='k',linestyle='--',label='half')
     plt.legend()
     plt.title('How many that are better in testing')
 

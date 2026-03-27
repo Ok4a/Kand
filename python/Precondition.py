@@ -4,6 +4,8 @@ from scipy.sparse.linalg._interface import LinearOperator
 import scipy.sparse as spar
 import util
 from itertools import islice, cycle
+from configparser import ConfigParser
+import matplotlib.pyplot as plt
 
 def Jacobi(A, invert = True, normalEq = False):
      
@@ -150,4 +152,113 @@ def parShiftJacobi(A, size:int, upper_coef:list[int] = []):
     return spar.csr_array(Jacobi(A) + np.diag(repCoef(size - 1, upper_coef, numUCoef), 1))
 
 
+def superShift(size, coef_list):
+    
+    if len(coef_list) > size-1:
+        raise Exception("More coefficients than super diagonals")
 
+
+    diagonals=[[coef_list[ii]]*(size-ii-1) for ii in range(len(coef_list))]
+    M_inv = spar.diags_array(diagonals, offsets= range(1,len(coef_list)+1))
+    
+
+    return M_inv
+
+
+def superParShift(size, coef_list):
+    
+    if len(coef_list) > size-1:
+        raise Exception("More coefficients than super diagonals")
+
+
+    diagonals=[repCoef((size-ii-1), coef_list[ii], len(coef_list[ii])) for ii in range(len(coef_list))]
+    M_inv = spar.diags_array(diagonals, offsets = range(1,len(coef_list)+1))
+    
+
+    return M_inv
+
+
+
+
+class shiftPrecond():
+    def __init__(self, config:ConfigParser, rng:np.random = None, zero_diag = True):
+        self.config = config
+        self.zero_diag = zero_diag
+        self.rng = np.random.default_rng(config.getint('Learn', 'seed'))
+
+        self.coef_dict = self._genInitialCoef()
+        self.temp_coef = self.coef_dict.copy()
+
+        self.super_index = None
+        self.par_index = None
+
+
+    def _genInitialCoef(self):
+        par_list = config.getintList('Precondition', 'par_list')
+        super_list = config.getintList('Precondition', 'super_list')
+
+        coef_dict = {}
+        for ii in range(len(super_list)):
+            coef_dict[super_list[ii]] = self.rng.normal(scale = 0.05, size=par_list[ii])
+        return coef_dict
+    
+    def makePrecond(self, scale = None):
+        size = self.config.getint('Data', 'dim')
+        # par_list = config.getintList('Precondition', 'par_list')
+        super_list = config.getintList('Precondition', 'super_list')
+        self.temp_coef = self.coef_dict.copy()
+
+        if scale is not None:
+            self.temp_coef[self.super_index][self.par_index] += self.change*scale
+        else:
+            pass
+            
+
+
+        diagonals=[repCoef((size-ii-1), self.temp_coef[ii], len(self.temp_coef[ii])) for ii in super_list]
+        M_inv = spar.diags_array(diagonals, offsets = super_list)
+
+        return M_inv
+    
+
+    def newChange(self):
+        self.super_index = self.rng.choice(len(config.getintList('Precondition', 'super_list')))
+        self.par_index = self.rng.choice(config.getintList('Precondition', 'par_list')[self.super_index])
+        self.change = self.rng.uniform(low = -config.getfloat('Learn', 'step_range'), high = config.getfloat('Learn', 'step_range'))
+
+
+
+    
+    def keep(self):
+        self.coef_dict = self.temp_coef.copy()
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    config = util.getConfig('test_config.ini')
+
+    precond = shiftPrecond(config)
+
+
+    M_inv = precond.makePrecond()
+    dense2 = M_inv.toarray()
+    dense2[dense2 == 0.0] = np.nan
+
+    plt.figure(2)
+    plt.imshow(dense2)
+
+    precond.newChange()
+
+    M_inv = precond.makePrecond(scale = 10000)
+    dense1 = M_inv.toarray()
+    dense1[dense1 == 0.0] = np.nan
+
+    plt.figure(1)
+    plt.imshow(dense1)
+    plt.show()
+    
