@@ -6,16 +6,18 @@
 
 
 \begin{document}
-Test
-% \maketitle
-% \input{subfiles/cg.tex}
-\input{subfiles/prelim/krylov.tex}
-% \input{subfiles/prelim/cg.tex}
-% \input{subfiles/bound.tex}
-% \input{subfiles/temp.tex}
 
 
-\printbibliography
+\input{subfiles/before/before.tex}
+\input{subfiles/prelim/prelim.tex}
+\clearpage
+\input{subfiles/Exploration/exploration.tex}
+
+
+\input{subfiles/after/after.tex}
+
+% \nocite{*}
+% \printbibliography[heading = bibnumbered , title = {Bibliography}]
 
 \label{P: last}
 \end{document}

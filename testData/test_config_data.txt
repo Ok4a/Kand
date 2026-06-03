@@ -1,0 +1,72 @@
+
+20/04/2026, 10:07:49
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 90
+	amount: 2
+	params: 1 0.30
+	seed: 0
+	dim: 8100
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+Precondition:
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+Test:
+No precond: Mean: 23350.5, median: 23350.5, std: 9116.5, percent: 23350.5, flag: 0, time: 11.985078299999998 
+	(14234, 32467)
+
+Jacobi: Mean: 21775.5, median: 21775.5, std: 2506.5, percent: 21775.5, BvN: 1, WvN: 1, flag: 0, time: 11.241627499999993 
+	(19269, 24282)
+
+Last: Mean: 22620.5, median: 22620.5, std: 5697.5, percent: 22620.5, BvN: 1, WvN: 1, BvJ: 1, WvJ: 1, flag: 0, time: 13.036114600000019 
+	(16923, 28318)
+
+
+Last Coef List
+{1: array([0.00628651]), -1: array([-0.00660524])}
+
+20/04/2026, 10:09:39
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 90
+	amount: 10
+	params: 1 0.60
+	seed: 0
+	dim: 8100
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+Precondition:
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+Test:

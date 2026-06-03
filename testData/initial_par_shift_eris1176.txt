@@ -1,0 +1,288 @@
+
+30/04/2026, 12:21:46
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 16
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1176
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: eris1176
+
+Train:
+
+Test:
+No precond: Mean: 1134.0, median: 1134.0, std: 0.0, percent: 1134.0, flag: 1 
+	(1134, 0)
+
+Last: Mean: 1103.125, median: 1093.5, std: 52.472, percent: 1115.3, flag: 14 
+	(1071, 1162, 1105, 1127, 1021, 1035, 1206, 1069, 1062, 1069, 1082, 1173, 1114, 1179, 1062, 1113)
+	(1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1)
+
+
+Run time: 3.104242500005057
+
+30/04/2026, 12:22:49
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 16
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1176
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: eris1176
+
+Train:
+
+Test:
+No precond: Mean: 1134.0, median: 1134.0, std: 0.0, percent: 1134.0, flag: 1 
+	(1134, 0)
+
+Last: Mean: 1103.125, median: 1093.5, std: 52.472, percent: 1115.3, flag: 14 
+	(1071, 1162, 1105, 1127, 1021, 1035, 1206, 1069, 1062, 1069, 1082, 1173, 1114, 1179, 1062, 1113)
+	(50, 50, 0, 50, 50, 50, 50, 50, 50, 50, 50, 50, 0, 50, 50, 50)
+
+
+Run time: 3.3017714000015985
+
+30/04/2026, 12:23:27
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 16
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1176
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: eris1176
+
+Train:
+
+Test:
+No precond: Mean: 1134.0, median: 1134.0, std: 0.0, percent: 1134.0, flag: 0 
+	(1134, 0)
+
+Last: Mean: 1103.125, median: 1093.5, std: 52.472, percent: 1115.3, flag: 0 
+	(1071, 1162, 1105, 1127, 1021, 1035, 1206, 1069, 1062, 1069, 1082, 1173, 1114, 1179, 1062, 1113)
+	(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+
+Run time: 3.5120990999857895
+
+30/04/2026, 12:23:47
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 16
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1176
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: eris1176
+
+Train:
+
+Test:
+No precond: Mean: 1134.0, median: 1134.0, std: 0.0, percent: 1134.0, flag: 0 
+	(1134, 0)
+
+Last: Mean: 1103.125, median: 1093.5, std: 52.472, percent: 1115.3, flag: 0 
+	(1071, 1162, 1105, 1127, 1021, 1035, 1206, 1069, 1062, 1069, 1082, 1173, 1114, 1179, 1062, 1113)
+	(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+
+Run time: 3.531561999989208
+
+30/04/2026, 12:24:23
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 16
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1176
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: eris1176
+
+Train:
+
+Test:
+No precond: Mean: 1134.0, median: 1134.0, std: 0.0, percent: 1134.0, flag: 1 
+	(1134, 0)
+
+Last: Mean: 1103.125, median: 1093.5, std: 52.472, percent: 1115.3, flag: 16 
+	(1071, 1162, 1105, 1127, 1021, 1035, 1206, 1069, 1062, 1069, 1082, 1173, 1114, 1179, 1062, 1113)
+	(np.float64(9.485494884847909e-11), np.float64(8.2675063202341e-11), np.float64(1.0075151950525896e-10), np.float64(9.907061877059352e-11), np.float64(9.467651518897117e-11), np.float64(9.41952581077665e-11), np.float64(8.01501859651539e-11), np.float64(9.5363757593242e-11), np.float64(9.281811058852786e-11), np.float64(9.595299165963558e-11), np.float64(9.75655073803766e-11), np.float64(8.41295427138387e-11), np.float64(1.0362840910466778e-10), np.float64(9.14855594723781e-11), np.float64(9.20823842393222e-11), np.float64(9.116018930749538e-11))
+
+
+Run time: 4.06748470000457
+
+30/04/2026, 12:25:38
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 16
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1176
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: eris1176
+
+Train:
+
+Test:
+No precond: Mean: 1134.0, median: 1134.0, std: 0.0, percent: 1134.0, flag: 0 
+	(1134, 0)
+
+Last: Mean: 1103.125, median: 1093.5, std: 52.472, percent: 1115.3, flag: 0 
+	(1071, 1162, 1105, 1127, 1021, 1035, 1206, 1069, 1062, 1069, 1082, 1173, 1114, 1179, 1062, 1113)
+	(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+
+Run time: 3.922865799977444

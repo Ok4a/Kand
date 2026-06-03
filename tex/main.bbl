@@ -1,0 +1,379 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{Bai2000}{book}{}{}
+      \name{author}{5}{}{%
+        {{hash=1152022ae21c42723dbd02ef3e840663}{%
+           family={Bai},
+           familyi={B\bibinitperiod},
+           given={Zhaojun},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=9f386718ad92f64a6b684329bf9bf9b1}{%
+           family={Demmel},
+           familyi={D\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b57e9502ada0493415564206d6641312}{%
+           family={Dongarra},
+           familyi={D\bibinitperiod},
+           given={Jack},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f79f8bc93ee24a940f26beb92980f992}{%
+           family={Ruhe},
+           familyi={R\bibinitperiod},
+           given={Axel},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b86b3f07301a8ecb9b40f5d57520995b}{%
+           family={Vorst},
+           familyi={V\bibinitperiod},
+           given={Henk},
+           giveni={H\bibinitperiod},
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+      }
+      \name{editor}{5}{}{%
+        {{hash=1152022ae21c42723dbd02ef3e840663}{%
+           family={Bai},
+           familyi={B\bibinitperiod},
+           given={Zhaojun},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=9f386718ad92f64a6b684329bf9bf9b1}{%
+           family={Demmel},
+           familyi={D\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b57e9502ada0493415564206d6641312}{%
+           family={Dongarra},
+           familyi={D\bibinitperiod},
+           given={Jack},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f79f8bc93ee24a940f26beb92980f992}{%
+           family={Ruhe},
+           familyi={R\bibinitperiod},
+           given={Axel},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b86b3f07301a8ecb9b40f5d57520995b}{%
+           family={Vorst},
+           familyi={V\bibinitperiod},
+           given={Henk},
+           giveni={H\bibinitperiod},
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Society for Industrial}%
+        {Applied Mathematics}%
+      }
+      \strng{namehash}{528a3fda56821a6a9fe15e44f335246a}
+      \strng{fullhash}{8db93fd4c59532588c5173d424ed85c8}
+      \strng{fullhashraw}{8db93fd4c59532588c5173d424ed85c8}
+      \strng{bibnamehash}{528a3fda56821a6a9fe15e44f335246a}
+      \strng{authorbibnamehash}{528a3fda56821a6a9fe15e44f335246a}
+      \strng{authornamehash}{528a3fda56821a6a9fe15e44f335246a}
+      \strng{authorfullhash}{8db93fd4c59532588c5173d424ed85c8}
+      \strng{authorfullhashraw}{8db93fd4c59532588c5173d424ed85c8}
+      \strng{editorbibnamehash}{528a3fda56821a6a9fe15e44f335246a}
+      \strng{editornamehash}{528a3fda56821a6a9fe15e44f335246a}
+      \strng{editorfullhash}{8db93fd4c59532588c5173d424ed85c8}
+      \strng{editorfullhashraw}{8db93fd4c59532588c5173d424ed85c8}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Templates for the Solution of Algebraic Eigenvalue Problems}
+      \field{year}{2000}
+      \verb{doi}
+      \verb 10.1137/1.9780898719581
+      \endverb
+      \verb{eprint}
+      \verb https://epubs.siam.org/doi/pdf/10.1137/1.9780898719581
+      \endverb
+      \verb{urlraw}
+      \verb https://epubs.siam.org/doi/abs/10.1137/1.9780898719581
+      \endverb
+      \verb{url}
+      \verb https://epubs.siam.org/doi/abs/10.1137/1.9780898719581
+      \endverb
+    \endentry
+    \entry{Barrett96}{article}{}{}
+      \name{author}{10}{}{%
+        {{hash=387fc75fd5e5abbea768792408a049d6}{%
+           family={Barrett},
+           familyi={B\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f8d4ad241314cd234b8f81138477745f}{%
+           family={Berry},
+           familyi={B\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=44f70ff973c59ee0935aae9279223d8e}{%
+           family={Chan},
+           familyi={C\bibinitperiod},
+           given={Tony},
+           giveni={T\bibinitperiod}}}%
+        {{hash=9f386718ad92f64a6b684329bf9bf9b1}{%
+           family={Demmel},
+           familyi={D\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8713c5b7e2dd17f9e5bdfdbb2be75600}{%
+           family={Donato},
+           familyi={D\bibinitperiod},
+           given={June},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b57e9502ada0493415564206d6641312}{%
+           family={Dongarra},
+           familyi={D\bibinitperiod},
+           given={Jack},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8f5cf31bd93743a8ea5093c586cacf29}{%
+           family={Eijkhout},
+           familyi={E\bibinitperiod},
+           given={Victor},
+           giveni={V\bibinitperiod}}}%
+        {{hash=2e30a21cb934ab4c4b4b189a030b620f}{%
+           family={Pozo},
+           familyi={P\bibinitperiod},
+           given={Roldan},
+           giveni={R\bibinitperiod}}}%
+        {{hash=175c869772530d1cdd1719d2b632f509}{%
+           family={Romine},
+           familyi={R\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod}}}%
+        {{hash=0c63eb2dd8b2a1f47ee14c1594ddbb5b}{%
+           family={Van\bibnamedelimb der\bibnamedelima Vorst},
+           familyi={V\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim V\bibinitperiod},
+           given={Henk},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{6b182f7503b382771615e09bb9c3b3c6}
+      \strng{fullhash}{b9d21f4c140f5095f367ac2099404990}
+      \strng{fullhashraw}{b9d21f4c140f5095f367ac2099404990}
+      \strng{bibnamehash}{6b182f7503b382771615e09bb9c3b3c6}
+      \strng{authorbibnamehash}{6b182f7503b382771615e09bb9c3b3c6}
+      \strng{authornamehash}{6b182f7503b382771615e09bb9c3b3c6}
+      \strng{authorfullhash}{b9d21f4c140f5095f367ac2099404990}
+      \strng{authorfullhashraw}{b9d21f4c140f5095f367ac2099404990}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematics of Computation}
+      \field{month}{09}
+      \field{title}{Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods}
+      \field{volume}{64}
+      \field{year}{1996}
+      \verb{doi}
+      \verb 10.2307/2153507
+      \endverb
+    \endentry
+    \entry{boutot2026}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=b9070fa83f80d65273750ae1ded69076}{%
+           family={Boutot},
+           familyi={B\bibinitperiod},
+           given={Alexandre},
+           giveni={A\bibinitperiod}}}%
+        {{hash=732eae0758b3106ad250df8ffadaf561}{%
+           family={Dsouza},
+           familyi={D\bibinitperiod},
+           given={Viraj},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{7f2745dc6e4c4c3520f28e7f427a58b0}
+      \strng{fullhash}{7f2745dc6e4c4c3520f28e7f427a58b0}
+      \strng{fullhashraw}{7f2745dc6e4c4c3520f28e7f427a58b0}
+      \strng{bibnamehash}{7f2745dc6e4c4c3520f28e7f427a58b0}
+      \strng{authorbibnamehash}{7f2745dc6e4c4c3520f28e7f427a58b0}
+      \strng{authornamehash}{7f2745dc6e4c4c3520f28e7f427a58b0}
+      \strng{authorfullhash}{7f2745dc6e4c4c3520f28e7f427a58b0}
+      \strng{authorfullhashraw}{7f2745dc6e4c4c3520f28e7f427a58b0}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{quant-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{Explicit Block Encodings of Discrete Laplacians with Mixed Boundary Conditions}
+      \field{year}{2026}
+      \verb{eprint}
+      \verb 2603.12405
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2603.12405
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2603.12405
+      \endverb
+    \endentry
+    \entry{Chong}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=6e040aecbb4501060735579844a0e7b6}{%
+           family={Chong},
+           familyi={C\bibinitperiod},
+           given={Y.\bibnamedelimi D.},
+           giveni={Y\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {LibreText}%
+      }
+      \strng{namehash}{6e040aecbb4501060735579844a0e7b6}
+      \strng{fullhash}{6e040aecbb4501060735579844a0e7b6}
+      \strng{fullhashraw}{6e040aecbb4501060735579844a0e7b6}
+      \strng{bibnamehash}{6e040aecbb4501060735579844a0e7b6}
+      \strng{authorbibnamehash}{6e040aecbb4501060735579844a0e7b6}
+      \strng{authornamehash}{6e040aecbb4501060735579844a0e7b6}
+      \strng{authorfullhash}{6e040aecbb4501060735579844a0e7b6}
+      \strng{authorfullhashraw}{6e040aecbb4501060735579844a0e7b6}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Computational Physics}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://phys.libretexts.org/Bookshelves/Mathematical_Physics_and_Pedagogy/Computational_Physics_(Chong)
+      \endverb
+      \verb{url}
+      \verb https://phys.libretexts.org/Bookshelves/Mathematical_Physics_and_Pedagogy/Computational_Physics_(Chong)
+      \endverb
+    \endentry
+    \entry{higham23}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5bec9d02065c9b35d45c881a24f7a1cd}{%
+           family={Higham},
+           familyi={H\bibinitperiod},
+           given={Nicholas\bibnamedelima J.},
+           giveni={N\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{fullhash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{fullhashraw}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{bibnamehash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{authorbibnamehash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{authornamehash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{authorfullhash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{authorfullhashraw}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{math.NA}
+      \field{eprinttype}{arXiv}
+      \field{title}{The Power of Bidiagonal Matrices}
+      \field{year}{2023}
+      \verb{eprint}
+      \verb 2311.06609
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2311.06609
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2311.06609
+      \endverb
+    \endentry
+    \entry{Matrix_market}{misc}{}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{title}{Matrix market}
+      \verb{urlraw}
+      \verb https://math.nist.gov/MatrixMarket/
+      \endverb
+      \verb{url}
+      \verb https://math.nist.gov/MatrixMarket/
+      \endverb
+    \endentry
+    \entry{Saad2003}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=7fe737d5e37812399cf79c29f4385a66}{%
+           family={Saad},
+           familyi={S\bibinitperiod},
+           given={Yousef},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Society for Industrial}%
+        {Applied Mathematics}%
+      }
+      \strng{namehash}{7fe737d5e37812399cf79c29f4385a66}
+      \strng{fullhash}{7fe737d5e37812399cf79c29f4385a66}
+      \strng{fullhashraw}{7fe737d5e37812399cf79c29f4385a66}
+      \strng{bibnamehash}{7fe737d5e37812399cf79c29f4385a66}
+      \strng{authorbibnamehash}{7fe737d5e37812399cf79c29f4385a66}
+      \strng{authornamehash}{7fe737d5e37812399cf79c29f4385a66}
+      \strng{authorfullhash}{7fe737d5e37812399cf79c29f4385a66}
+      \strng{authorfullhashraw}{7fe737d5e37812399cf79c29f4385a66}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{Second}
+      \field{title}{Iterative Methods for Sparse Linear Systems}
+      \field{year}{2003}
+      \verb{doi}
+      \verb 10.1137/1.9780898718003
+      \endverb
+      \verb{eprint}
+      \verb https://epubs.siam.org/doi/pdf/10.1137/1.9780898718003
+      \endverb
+      \verb{urlraw}
+      \verb https://epubs.siam.org/doi/abs/10.1137/1.9780898718003
+      \endverb
+      \verb{url}
+      \verb https://epubs.siam.org/doi/abs/10.1137/1.9780898718003
+      \endverb
+    \endentry
+    \entry{Vorst03}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=0c63eb2dd8b2a1f47ee14c1594ddbb5b}{%
+           family={Van\bibnamedelimb der\bibnamedelima Vorst},
+           familyi={V\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim V\bibinitperiod},
+           given={Henk},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{0c63eb2dd8b2a1f47ee14c1594ddbb5b}
+      \strng{fullhash}{0c63eb2dd8b2a1f47ee14c1594ddbb5b}
+      \strng{fullhashraw}{0c63eb2dd8b2a1f47ee14c1594ddbb5b}
+      \strng{bibnamehash}{0c63eb2dd8b2a1f47ee14c1594ddbb5b}
+      \strng{authorbibnamehash}{0c63eb2dd8b2a1f47ee14c1594ddbb5b}
+      \strng{authornamehash}{0c63eb2dd8b2a1f47ee14c1594ddbb5b}
+      \strng{authorfullhash}{0c63eb2dd8b2a1f47ee14c1594ddbb5b}
+      \strng{authorfullhashraw}{0c63eb2dd8b2a1f47ee14c1594ddbb5b}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780521818285}
+      \field{month}{04}
+      \field{title}{Iterative Krylov Methods for Large Linear Systems}
+      \field{volume}{13}
+      \field{year}{2003}
+      \verb{doi}
+      \verb 10.1017/CBO9780511615115
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

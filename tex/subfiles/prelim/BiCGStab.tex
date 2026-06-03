@@ -1,0 +1,47 @@
+The last variant of CG we will look at is Bi-Conjugate Gradient Stabilized (Bi-CGStab). The derivation uses the same idea as CGS with changing the residual from Bi-CG with the help of bi-orthogonality between the  two sets of residuals. Then instead of combining the two polynomials into one, \(\hat{r}_i=P_i^2(A)r_0\), changing the second polynomial to a different polynomial such that it minimizes \(r_i\) and the recursion relations with the polynomial is simple to derive, \cite{Saad2003}. For Bi-CGStab the polynomial is of the form
+\begin{equation}\label{eq: Q(A)}
+    Q_i(X)=(I-\omega_iX)Q_{i-1}(X),
+\end{equation}
+the resulting residual is therefore of the form 
+\begin{equation}\label{eq: bicgstab r hat}
+    \hat{r}_i=Q_i(A)P_i(A)r_0.
+\end{equation} 
+
+To derive the recursion relation for this new residual we will use the polynomial form of \(r_i\) and \(p_i\) from Bi-CG, with polynomials \(P_i\) and \(T_{i-1}\) of degree \(i\) and \(i-1\) respectably
+\begin{align}
+    r_i&=P_i(A)r_0 &P_i(A)r_0&=(P_{i-1}(A)-\alpha_i AT_{i-1}(A))r_0\label{eq: bicg r_i poly}\\
+    p_i&=T_{i-1}(A)r_0 &T_{i-1}(A)r_0&=(P_{i-1}(A)+\beta_{i-1}T_{i-2}(A))r_0\label{eq: bicg p_i poly}
+\end{align}
+
+With \eqref{eq: bicg r_i poly} and the definition of \(Q_i\) \eqref{eq: Q(A)}, the recursion relation for the residual can be derived with substitution in \eqref{eq: bicgstab r hat},
+\begin{equation*}
+    Q_i(A)P_i(A)r_0=(I-\omega_i A)(Q_{i-1}(A)P_{i-1}(A)-\alpha_i A Q_{i-1}(A)T_{i-1}(A))r_0,
+\end{equation*}
+with the need to derive what the product of \(Q_i(A)T_i(A)r_0\). Which can be derived with substitution with \eqref{eq: bicg p_i poly} to get
+\begin{equation*}
+    Q_i(A)T_i(A)r_0=(Q_i(A)P_i(A)+\beta_i(I-\omega_iA)Q_{i-1}(A)T_{i-1}(A))r_0.
+\end{equation*}
+
+\noindent With \(\hat{p}_i=Q_{i-1}(A)T_{i-1}(A)r_0\), the vector form of \(\hat{p}_i\) and \(\hat{r}_i\) is equal to
+\begin{align}
+    \hat{p}_i&=r_{i-1}+\beta_i(I-\omega_{i-1}A)\hat{p}_{i-1}\\
+    \hat{r}_i&=(I-\omega A)(\hat{r}_{i-1}-\alpha_i A\hat{p})\label{eq: r=(i-oA)(r-aAp)}.
+\end{align}
+
+\noindent For the equation for \(x_{i-1}\) we first need to define \(s_i=\hat{r}_i-\alpha_i A \hat{p}\) then rewrite \eqref{eq: r=(i-oA)(r-aAp)} as such
+\begin{equation}
+    \hat{r}_i=\hat{r}_{i-1}-\alpha_{i-1}A\hat{p}_{i-1}-\omega_{i-1}As_{i-1}.
+\end{equation}
+Which gets us the update relation for \(x_i\)
+\begin{equation}
+    x_i=x_{i-1}+\alpha_{i-1}\hat{p}_{i-1}+\omega s_{i-1}.
+\end{equation}
+Lastly the scalers \(\alpha_i\), \(\beta_i\), \(\omega_i\) and \(\rho_i\) can be shown to be equal to 
+\begin{align}
+    \alpha_i&=\frac{\rho_{i-1}}{\tilde{r}^TA\hat{p}_i}\\
+    \beta_i&=\frac{\rho_{i-1}}{\rho_{i-2}}\frac{\alpha_{i-1}}{\omega_{i-1}}\\
+    \omega_i&=\frac{(As)^Ts}{(As)^TAs}\\
+    \rho_i&=\tilde{r}^T\hat{r}_{i-1}
+\end{align}
+
+From the orthogonality from the start of the derivation, \(P_i(A)r_0,Q_j(A^T)\hat{r}_0=0\), says that Bi-CGStab will terminate in exact arithmetic. The whole derivation is based on \cite{Vorst03}.

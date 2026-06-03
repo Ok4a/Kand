@@ -1,9 +1,0 @@
-The base idea is to take a basic machine learning type approach, similar to how neural nets are learned, where we try to learn a preconditioning matrix, that hopefully can learn some underlining structure of matricis of the data set. To do this we start with a simple random matrix and use it as the preconditioner for systems in the data set. Then in each of the iterations of the learning we change the preconditioner by some amount and solve the systems to see if the change is better according to some improvement function.
-
-
-First testing
-
-The first thing that is need is to determine the structure of the preconditioning matrix. Conditions for the structure are 
-
-
-as we want the matrix to be easy to apply to vector, 

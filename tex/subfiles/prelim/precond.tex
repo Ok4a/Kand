@@ -1,0 +1,52 @@
+
+Because the convergence rate of CG depends on the condition number, if the linear system is transformed such that the new systems condition number is smaller would result in faster convergence. This is called preconditioning the linear system. More specific left preconditioning by a matrix \(M\) is to transforme the system \(Ax=b\) as such
+\begin{equation*}
+    M^{-1}Ax=M^{-1}b,
+\end{equation*}
+with the goal that
+\begin{equation*}
+    \kappa(M^{-1}A)\ll  \kappa(A).
+\end{equation*}
+
+Because of the condition that the matrix needs to be SPD, the transformed system needs to be SPD and because \(M^{-1}A\) is only symmetric if both are symmetric and they commute. This is because a matrix \(B\) is symmetric if and only if
+\begin{equation*}
+    (Bx,y)=(x,By),\quad \forall x,y\in \mathbb{R}^n.
+\end{equation*}
+
+To ensure the preconditioned systems is SPD, we can change the inner product we use in the recursion relations to
+\begin{equation}
+    [x,y]:=(x,My).
+\end{equation}
+
+This inner product is a prober inner product if \(M\) is positive definite. With this change in inner product, \(M^{-1}A\) is symmetric
+\begin{align*}
+    [M^{-1}Ax,y]&=(M^{-1}Ax,My)\\
+    &=(Ax,M^{-1}My)\\
+    &=(x,Ay)\\
+    &=(x,MM^{-1}Ay)\\
+    &=[x,M^{-1}Ay].
+\end{align*}
+
+\noindent The new recurrence relations for CG therefore be written as with \(r_0=M^{-1}(b-Ax_0)\) and \(p_0=w_0\)
+\begin{align*}
+    x_i&=x_{i-1}+\alpha_i p_i\\
+    r_i&=r_{i-1}-\alpha_i A p_i\\
+    p_i&=w_{i-1}+\beta_{i-1} p_{i-1}\\
+    w_i&=M^{-1}r_{i}
+\intertext{with scalers}
+    \alpha_i&=\frac{\rho_{i-1}}{p_i^TAp_i}\\
+    \beta_i&=\frac{\rho_i}{\rho_{i-1}}\\
+    \rho_i&=r_i^Tw_i.
+\end{align*}
+
+The new relations have an extra matrix vector product compared to the unpreconditioned version. Because of this it is important that the decrease in condition number is large enough such that the extra computational cost needed does not make actual run time of the algorithm longer.
+
+An example of a preconditioner is the (point) Jacobi preconditioner, which is constructed from the diagonal of the original system, \cite{Barrett96}, meaning for matrix \(A=(a_{i,j})\) the preconditioner \(M=(m_{i,j})\) is defined as
+\begin{equation}
+    m_{i,j}=\begin{cases}
+        a_{i,j}& \text{if } i=j\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+This preconditioner has the advantage that it is sparse. It can therefore have fast matrix vector product if constructed as a compressed sparse row matrix (CSR matrix) which has a matrix vector product computational cost depended on the number of nonzero entries instead of the size of the matrix for the standard implementation \cite{Bai2000}.

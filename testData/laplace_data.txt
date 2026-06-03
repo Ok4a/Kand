@@ -1,0 +1,127 @@
+
+22/04/2026, 12:47:42
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 100
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: orsirr_1
+
+Train:
+
+Test:
+No precond: Mean: 56.29, median: 52.0, std: 17.0, percent: 55.5, flag: 0 
+	(61, 38, 56, 102, 42, 78, 41, 45, 45, 43, 63, 66, 55, 49, 54, 63, 47, 106, 35, 42, 121, 44, 57, 105, 50, 38, 53, 49, 60, 86, 40, 69, 57, 65, 52, 54, 44, 52, 72, 44, 48, 39, 54, 48, 61, 58, 77, 90, 46, 41, 37, 72, 49, 42, 39, 54, 49, 66, 63, 52, 56, 45, 72, 40, 49, 30, 52, 50, 49, 62, 47, 46, 44, 44, 65, 46, 77, 62, 55, 66, 50, 39, 58, 91, 69, 45, 38, 80, 48, 62, 39, 61, 40, 61, 43, 103, 63, 58, 47, 49, 0)
+
+
+Run time: 3.00002284348011e-07
+
+22/04/2026, 12:48:39
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 25
+	amount: 100
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 625
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: orsirr_1
+
+Train:
+
+Test:
+No precond: Mean: 150593.56, median: 3024.0, std: 1098690.725, percent: 7922.18, flag: 93 
+	(594, 3941, 2267, 1889, 142, 12636, 177, 102632, 6051, 1429205, 419, 165, 220469, 248, 2384, 1074, 21821, 237, 2596, 1472, 25363, 360, 318, 8437, 806, 10461, 3687, 289, 197, 824, 15137, 3034, 4287, 117, 5150, 7944, 995, 4941, 1387, 41600, 1011, 953, 1386, 6050, 452, 12847, 1648, 9196, 5229, 6255, 380, 576, 10934583, 369, 6147, 5205, 451, 6075, 5667, 78867, 17194, 713, 2186, 3193, 402, 2767, 160259, 4747, 4963, 8209, 421, 4970, 390, 4293, 232464, 9583, 337964, 909, 177, 1320, 196, 3924, 1047139, 2564, 18042, 3847, 995, 3132, 3014, 20723, 103537, 89, 1316, 6270, 560, 159, 5946, 262, 10338, 1079, 0)
+
+
+Run time: 6.00004568696022e-07
+
+26/04/2026, 11:46:44
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 25
+	amount: 10
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 625
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: bcsstk10
+
+Train:
+
+Test:

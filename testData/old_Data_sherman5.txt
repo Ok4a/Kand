@@ -1,0 +1,180 @@
+
+21/04/2026, 13:13:30
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 1
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 3312
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 1
+	par_list: 1
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+
+Train:
+(0, 1): Mean: 3298.0, median: 3298.0, std: 0.0, percent: 3298.0, B: 1, W: 0, 
+	(3298,)
+(2, 3): Mean: 3217.0, median: 3217.0, std: 0.0, percent: 3217.0, B: 1, W: 0, 
+	(3217,)
+(5, 6): Mean: 2755.0, median: 2755.0, std: 0.0, percent: 2755.0, B: 1, W: 0, 
+	(2755,)
+(18, 19): Mean: 2586.0, median: 2586.0, std: 0.0, percent: 2586.0, B: 1, W: 0, 
+	(2586,)
+
+Test:
+No precond: Mean: 3115.0, median: 3115.0, std: 0.0, percent: 3115.0, flag: 0 
+	(3115,)
+
+Jacobi: Mean: 3115.0, median: 3115.0, std: 0.0, percent: 3115.0, BvN: 0, WvN: 0, flag: 0 
+	(3115,)
+
+Last: Mean: 2586.0, median: 2586.0, std: 0.0, percent: 2586.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(2586,)
+
+Best: Mean: 2586.0, median: 2586.0, std: 0.0, percent: 2586.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(2586,)
+
+Last Coef List
+{1: array([0.0230522])}
+
+Best Coef List
+{1: array([0.0230522])}
+
+Run time: 147.67250440000498
+
+22/04/2026, 11:19:51
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 1
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 3312
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 1
+	par_list: 1
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+
+Train:
+
+Test:
+
+22/04/2026, 11:20:43
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 1
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 3312
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 1
+	par_list: 1
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+
+Train:
+
+Test:
+
+22/04/2026, 11:21:13
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 1
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 3312
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 1
+	par_list: 1
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+
+Train:
+
+Test:
+Last: Mean: 3084.0, median: 3084.0, std: 0.0, percent: 3084.0, flag: 0 
+	(3084, 3084, 3084, 3084, 3084, 3084, 3084, 3084, 3084, 3084)
+
+
+Run time: 4.00003045797348e-07

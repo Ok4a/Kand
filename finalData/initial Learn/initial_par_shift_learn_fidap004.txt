@@ -1,0 +1,80 @@
+
+26/04/2026, 13:05:46
+Config file: config/initial_par_shift_MML/initial_par_shift_MML_fidap004.ini
+Data:
+	1d_laplace_size: 25
+	amount: 1000
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1601
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 300
+	step_range: 0.1
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: uniform
+	params: 0 0.05
+	num_coef: 8
+	par_list: 8
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: fidap004
+
+Train:
+(0, 1): Mean: 5054.0, median: 5054.0, std: 0.0, percent: 5054.0, B: 1000, W: 0, 
+	(5054,)
+(2, 3): Mean: 4852.0, median: 4852.0, std: 0.0, percent: 4852.0, B: 1, W: 0, 
+	(4852,)
+(9, 10): Mean: 4757.0, median: 4757.0, std: 0.0, percent: 4757.0, B: 1, W: 0, 
+	(4757,)
+(18, 19): Mean: 4735.0, median: 4735.0, std: 0.0, percent: 4735.0, B: 1, W: 0, 
+	(4735,)
+(26, 27): Mean: 4655.0, median: 4655.0, std: 0.0, percent: 4655.0, B: 1, W: 0, 
+	(4655,)
+(62, 63): Mean: 4602.0, median: 4602.0, std: 0.0, percent: 4602.0, B: 1, W: 0, 
+	(4602,)
+(77, 78): Mean: 4538.0, median: 4538.0, std: 0.0, percent: 4538.0, B: 1, W: 0, 
+	(4538,)
+(86, 87): Mean: 4505.0, median: 4505.0, std: 0.0, percent: 4505.0, B: 1, W: 0, 
+	(4505,)
+(117, 118): Mean: 4456.0, median: 4456.0, std: 0.0, percent: 4456.0, B: 1, W: 0, 
+	(4456,)
+(145, 146): Mean: 4304.0, median: 4304.0, std: 0.0, percent: 4304.0, B: 1, W: 0, 
+	(4304,)
+
+Test:
+No precond: Mean: 4695.0, median: 4695.0, std: 0.0, percent: 4695.0, flag: 0 
+	(4695,)
+
+Jacobi: Mean: 4695.0, median: 4695.0, std: 0.0, percent: 4695.0, BvN: 0, WvN: 0, flag: 0 
+	(4695,)
+
+Last: Mean: 4304.0, median: 4304.0, std: 0.0, percent: 4304.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(4304,)
+
+Best: Mean: 4304.0, median: 4304.0, std: 0.0, percent: 4304.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(4304,)
+
+Last Coef List
+{1: array([-0.00429595, -0.02302133,  0.01393663,  0.0088099 , -0.0095332 ,
+       -0.01433491,  0.03375826,  0.02294966])}
+
+Best Coef List
+{1: array([-0.00429595, -0.02302133,  0.01393663,  0.0088099 , -0.0095332 ,
+       -0.01433491,  0.03375826,  0.02294966])}
+
+Run time: 749.1573375696316

@@ -1,0 +1,47 @@
+
+22/04/2026, 12:35:50
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 100
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1030
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: orsirr_1
+
+Train:
+
+Test:
+No precond: Mean: 2104.0, median: 2104.0, std: 0.0, percent: 2104.0, flag: 0 
+	(2104, 0)
+
+Last: Mean: 2194.54, median: 2173.0, std: 259.94, percent: 2180.16, flag: 0 
+	(2413, 1992, 2111, 2303, 1799, 1927, 1898, 2100, 2312, 2300, 2496, 2400, 2162, 2276, 2149, 2073, 2363, 1865, 2307, 2383, 2080, 1897, 2031, 2046, 2237, 2428, 2461, 2407, 2310, 1869, 1998, 2324, 2134, 2546, 2427, 1718, 2464, 2445, 2006, 2188, 1732, 2153, 2548, 2569, 2355, 2053, 2184, 2051, 1951, 2580, 1710, 2236, 2356, 1892, 2049, 2107, 1773, 1890, 2357, 1898, 2531, 1870, 2571, 2086, 2148, 2479, 1996, 2383, 1919, 2043, 2350, 1976, 2470, 1738, 2097, 1957, 2116, 2411, 3045, 2661, 2396, 2478, 2190, 2089, 2376, 2200, 2085, 1899, 2372, 2754, 1993, 2199, 2560, 1959, 2290, 2128, 2245, 1835, 2638, 1832)
+
+
+Run time: 3.00002284348011e-07

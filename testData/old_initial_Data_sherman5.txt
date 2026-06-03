@@ -1,0 +1,92 @@
+
+22/04/2026, 12:21:49
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 100
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 3312
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+
+Train:
+
+Test:
+No precond: Mean: 3115.0, median: 3115.0, std: 0.0, percent: 3115.0, flag: 0 
+	(3115, 0)
+
+Last: Mean: 3494.51, median: 3494.0, std: 427.796, percent: 3443.26, flag: 0 
+	(3920, 2892, 3797, 4519, 3890, 3743, 3729, 3984, 4128, 3560, 2663, 3785, 3681, 3238, 4560, 3376, 3095, 3725, 3417, 3427, 3367, 2807, 3881, 3431, 2942, 3607, 4038, 2763, 3694, 3808, 3330, 2974, 3855, 2998, 3239, 3317, 2905, 3823, 2737, 4366, 4200, 2995, 3886, 3303, 3189, 4001, 3648, 2741, 3306, 4100, 3593, 3578, 3786, 3457, 3328, 3928, 2871, 3215, 3715, 3345, 3861, 3979, 3374, 3134, 3477, 3501, 4529, 3785, 3490, 3126, 3784, 2948, 3586, 3498, 3390, 3419, 3754, 3186, 3353, 3504, 3386, 3562, 3541, 3539, 3303, 3522, 3572, 3543, 2837, 3532, 3393, 2922, 4553, 3232, 3034, 3006, 3373, 3183, 3880, 2664)
+
+
+Run time: 6.999762263149023e-07
+
+22/04/2026, 12:34:37
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 100
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 3312
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 50
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 10
+	par_list: 10
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: sherman5
+
+Train:
+
+Test:
+No precond: Mean: 3115.0, median: 3115.0, std: 0.0, percent: 3115.0, flag: 0 
+	(3115, 0)
+
+Last: Mean: 3494.51, median: 3494.0, std: 427.796, percent: 3443.26, flag: 0 
+	(3920, 2892, 3797, 4519, 3890, 3743, 3729, 3984, 4128, 3560, 2663, 3785, 3681, 3238, 4560, 3376, 3095, 3725, 3417, 3427, 3367, 2807, 3881, 3431, 2942, 3607, 4038, 2763, 3694, 3808, 3330, 2974, 3855, 2998, 3239, 3317, 2905, 3823, 2737, 4366, 4200, 2995, 3886, 3303, 3189, 4001, 3648, 2741, 3306, 4100, 3593, 3578, 3786, 3457, 3328, 3928, 2871, 3215, 3715, 3345, 3861, 3979, 3374, 3134, 3477, 3501, 4529, 3785, 3490, 3126, 3784, 2948, 3586, 3498, 3390, 3419, 3754, 3186, 3353, 3504, 3386, 3562, 3541, 3539, 3303, 3522, 3572, 3543, 2837, 3532, 3393, 2922, 4553, 3232, 3034, 3006, 3373, 3183, 3880, 2664)
+
+
+Run time: 3.00002284348011e-07

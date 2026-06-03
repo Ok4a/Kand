@@ -1,0 +1,90 @@
+\documentclass{beamer}
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+\usepackage[bb=boondox]{mathalfa}
+
+\usepackage{xcolor}
+\usepackage{changepage}
+\usepackage{tikz}
+\usepackage{ifthen}
+\usetikzlibrary{math}
+
+
+
+\usefonttheme[onlymath]{serif}
+
+
+
+\definecolor{darkgreen}{HTML}{3C6A12}
+\definecolor{lightgreen}{HTML}{F0F7E0}
+
+\setbeamercolor{frametitle}{fg=lightgreen, bg=darkgreen}
+
+\setbeamertemplate{itemize item}{\color{darkgreen}$\blacksquare$}
+\setbeamertemplate{itemize subitem}{\color{darkgreen}$\blacktriangleright$}
+\author{ Ole W. Kaa (olkaa21@student.sdu.dk)}
+
+
+
+\newcommand\Wider[2][3em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
+
+\beamertemplatenavigationsymbolsempty
+
+\begin{document}
+
+
+\begin{frame}{Outline}
+    \begin{itemize}
+        \setlength\itemsep{1em}
+        \item Itō integral in \(M_{step}^2\)
+        \item Itō integral in \(L^2_{ad}\)
+        \item Proof of properties  Itō integral
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Definition 3.2: Itō integral for \(f\) in \(M_{step}^2\) }
+   The Itō integral \(I(f)\) of \(f\in M_{step}^2 \) is defined by
+        \[I(f)=\sum_{i=0}^{n-1}\xi_i\cdot (W(t_{i+1})-W(t_i)) \]
+\end{frame}
+
+\begin{frame}{Lemma 3.1}
+    For \(f,g\in M_{step}^2,\alpha,\beta\in\mathbb{R} \) it holds
+    \begin{itemize}
+        \setlength\itemsep{1em}
+        \item \(I(f)\) is  \(\mathcal{F}(T) \)-measurable
+        \item \(I(\alpha f+\beta g)=\alpha I(f)+\beta I(g) \)
+        \item \(E [I(f)]=0 \)
+        \item \(E[I(f)I(g)]=E[\int_0^T f(t)g(t) dt] \)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Definition 3.4: Itō integral for \(f\) in \(L^2_{ad}\)}
+    \(I(f)\in L^2\) is called Itō integral of \(f\in L^2_{ad} ([0,T]\times \Omega )\) if
+        \[\lim_{n\rightarrow \infty} E([I(f)-I(f_n)]^2)=0\]
+    for a sequence  \(\{f_n\}_{n\in \mathbb{N} }\subset M_{step}^2 \) which approximates \(f\) in \(L_{ad}^2([0,T]\times \Omega )\).\\
+    \quad\\
+    Notation: \(I(f)=\int_0^T f(t)dW(t) \)
+
+\end{frame}
+
+\begin{frame}{Theorem 3.5}
+    For \(f,g\in L_{ad}^2,\alpha,\beta\in\mathbb{R} \) it holds
+    \begin{itemize}
+        \setlength\itemsep{1em}
+        \item \(I(f)\) is  \(\mathcal{F}(T) \)-measurable
+        \item \(I(\alpha f+\beta g)=\alpha I(f)+\beta I(g),\quad a.s. \)
+        \item \(E [I(f)]=0 \)
+        \item \(E[I(f)I(g)]=E[\int_0^T f(t)g(t) dt] \)
+    \end{itemize}
+\end{frame}
+
+
+
+
+\end{document}

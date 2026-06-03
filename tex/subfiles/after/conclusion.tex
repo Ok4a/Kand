@@ -1,0 +1,16 @@
+% We can conclude from this is that out learning algorithm works and that the learned preconditioner can decrease the solver iteration count for unseen systems. The biggest problem is handling when a system does not converge, as the current version being not accepting any change to coefficients that would cause a system to not converge.***
+
+From the exploration we have derived a structure of a preconditioner and a simple learning algorithm that can learn a general part such that it improves the solver iteration count for a set of unseen 2-dimensional discrete laplace operator with perturbations. Therefore we can say that we have accomplished what we set out to do with this project, learn a general preconditioner that decreases the solver iteration counts of unseen linear systems.
+
+With the biggest problem of the current preconditioner is that it might be to overfitted to the structure of the 2-dimensional discrete laplace operator. Meaning that if the current version would try to learn a preconditioner for a matrices with different structure, the learning might not lead to as good results as we have seen from our testings. And would be a futre test that would needed to be done.
+% Another potential problem is even when the training and test data is independent
+
+
+A part of the problem description that was not done was using an established Machine Learning Algorithm for learning of the preconditioner. The main reason for using our simple learning algorithm, as mentioned, is the need to define a loss or cost function associated to a change made to the potential preconditioner. One problem is the standard loss functions are defined with the expectation of an continues input and because our current measure associated to a preconditioner is the solver iteration counts, it could therefore encounter problems.
+
+
+% From the exploration of the learning a preconditioner it is fair to say that we have accomplished what we set out to do with this project. That it is possible to learn a preconditioner decreases the solver iteration count to a degree such that it is better than the trivial preconditioner Jacobi preconditioning, that in of it self works well on the data set.
+
+% we have found a way to learn a preconditioner that decreases the solver iteration count of an unseen data set of linear systems and that it works better in general than the trivial preconditioner Jacobi preconditioning.
+
+% One of the next steps for this project would be to use a more astables*** Machine Learning algorithm for the learning of 

@@ -1,0 +1,35 @@
+\contentsline {section}{Contents}{1}{Doc-Start}%
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Iterative methods for linear systems}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Conjugate Gradient}{3}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Convergece}{5}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Preconditioning}{8}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}CG Variants}{9}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Normal Equation}{9}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Bi-Conjugate Gradient}{9}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Conjugate Gradient Squared}{10}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}Bi-Conjugate Gradient Stabilized}{11}{subsubsection.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.5}Comparison}{12}{subsubsection.2.2.5}%
+\contentsline {section}{\numberline {3}Exploration of learning preconditioners}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Structure of the preconditioner}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Initial learning algorithm}{15}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Better exploration of the preconditioner}{17}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Discrete laplace operator}{19}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Improvement functions}{23}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}MEAN improvement function}{23}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}MEDIAN improvement function}{23}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}SIGN improvement function}{23}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}Comparison with Jacobi preconditioning}{27}{subsubsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.5}Shifted Jacobi preconditioner}{29}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Plateau in learning}{31}{subsubsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.6}Allowing disimprovement}{32}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Number of partitions}{34}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Fewer}{36}{subsubsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.8}Number of diagonals}{37}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Super- and subdiagonals}{39}{subsection.3.9}%
+\contentsline {subsubsection}{\numberline {3.9.1}Number of partitions}{40}{subsubsection.3.9.1}%
+\contentsline {subsubsection}{\numberline {3.9.2}Symmetry}{42}{subsubsection.3.9.2}%
+\contentsline {subsection}{\numberline {3.10}Testing the algorithm on larger systems}{43}{subsection.3.10}%
+\contentsline {section}{\numberline {4}Conclusion}{46}{section.4}%
+\contentsline {section}{\numberline {5}Bibliography}{47}{section.5}%
+\contentsline {section}{\numberline {6}Appendix}{47}{section.6}%

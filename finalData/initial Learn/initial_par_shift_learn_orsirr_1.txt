@@ -1,0 +1,96 @@
+
+26/04/2026, 13:16:45
+Config file: config/initial_par_shift_MML/initial_par_shift_MML_orsirr_1.ini
+Data:
+	1d_laplace_size: 25
+	amount: 1000
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1030
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 300
+	step_range: 1
+	method: mean
+	seed: 0
+	change_scales: 1
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.1
+	num_coef: 15
+	par_list: 15
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: orsirr_1
+
+Train:
+(0, 1): Mean: 5231.0, median: 5231.0, std: 0.0, percent: 5231.0, B: 1000, W: 0, 
+	(5231,)
+(1, 2): Mean: 4332.0, median: 4332.0, std: 0.0, percent: 4332.0, B: 1, W: 0, 
+	(4332,)
+(9, 10): Mean: 3716.0, median: 3716.0, std: 0.0, percent: 3716.0, B: 1, W: 0, 
+	(3716,)
+(31, 32): Mean: 3630.0, median: 3630.0, std: 0.0, percent: 3630.0, B: 1, W: 0, 
+	(3630,)
+(37, 38): Mean: 3423.0, median: 3423.0, std: 0.0, percent: 3423.0, B: 1, W: 0, 
+	(3423,)
+(125, 126): Mean: 3364.0, median: 3364.0, std: 0.0, percent: 3364.0, B: 1, W: 0, 
+	(3364,)
+(127, 128): Mean: 3169.0, median: 3169.0, std: 0.0, percent: 3169.0, B: 1, W: 0, 
+	(3169,)
+(128, 129): Mean: 3087.0, median: 3087.0, std: 0.0, percent: 3087.0, B: 1, W: 0, 
+	(3087,)
+(132, 133): Mean: 2656.0, median: 2656.0, std: 0.0, percent: 2656.0, B: 1, W: 0, 
+	(2656,)
+(145, 146): Mean: 2642.0, median: 2642.0, std: 0.0, percent: 2642.0, B: 1, W: 0, 
+	(2642,)
+(154, 155): Mean: 2519.0, median: 2519.0, std: 0.0, percent: 2519.0, B: 1, W: 0, 
+	(2519,)
+(169, 170): Mean: 2270.0, median: 2270.0, std: 0.0, percent: 2270.0, B: 1, W: 0, 
+	(2270,)
+(263, 264): Mean: 2199.0, median: 2199.0, std: 0.0, percent: 2199.0, B: 1, W: 0, 
+	(2199,)
+(266, 267): Mean: 2127.0, median: 2127.0, std: 0.0, percent: 2127.0, B: 1, W: 0, 
+	(2127,)
+(276, 277): Mean: 2120.0, median: 2120.0, std: 0.0, percent: 2120.0, B: 1, W: 0, 
+	(2120,)
+(278, 279): Mean: 2061.0, median: 2061.0, std: 0.0, percent: 2061.0, B: 1, W: 0, 
+	(2061,)
+(292, 293): Mean: 1998.0, median: 1998.0, std: 0.0, percent: 1998.0, B: 1, W: 0, 
+	(1998,)
+
+Test:
+No precond: Mean: 2025.0, median: 2025.0, std: 0.0, percent: 2025.0, flag: 0 
+	(2025,)
+
+Jacobi: Mean: 2025.0, median: 2025.0, std: 0.0, percent: 2025.0, BvN: 0, WvN: 0, flag: 0 
+	(2025,)
+
+Last: Mean: 1998.0, median: 1998.0, std: 0.0, percent: 1998.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(1998,)
+
+Best: Mean: 1998.0, median: 1998.0, std: 0.0, percent: 1998.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(1998,)
+
+Last Coef List
+{1: array([ 0.21554874, -0.01321049,  0.06404227,  0.1615697 , -0.05356694,
+        0.03615951, -0.13108766,  0.0947081 , -0.03639035, -0.02740534,
+       -0.41858866, -0.00369882, -0.04009605, -0.47296334,  0.02369642])}
+
+Best Coef List
+{1: array([ 0.21554874, -0.01321049,  0.06404227,  0.1615697 , -0.05356694,
+        0.03615951, -0.13108766,  0.0947081 , -0.03639035, -0.02740534,
+       -0.41858866, -0.00369882, -0.04009605, -0.47296334,  0.02369642])}
+
+Run time: 422.5454900674522

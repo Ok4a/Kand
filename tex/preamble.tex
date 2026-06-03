@@ -164,8 +164,8 @@ xlist/.default=0
 % My name for when I print my lecture notes to use for an open book exam.
 % \fancyhead[L]{Noah Landergren Falk}
 
-\fancyhead[L]{Kand}
-\fancyhead[C]{}
+\fancyhead[L]{SPMM801}
+\fancyhead[C]{Ole Wolsing Kaa}
 \fancyhead[R]{\today}
 %\fancyfoot[R]{\thepage\ of \pageref{P: last}}
 \fancyfoot[L]{} %\leftmark adds a section reference
@@ -243,19 +243,21 @@ xlist/.default=0
 \usetikzlibrary{positioning}
 
 \usepackage{setspace}
-\usepackage[style=numeric]{biblatex}
+\usepackage[backend=biber, style=numeric]{biblatex}
 \addbibresource{ref.bib}
 
 
-%\usepackage[numbib]{tocbibind}
 
 
 \usepackage{tabularx}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+
 \usepackage{minted}
-\title{Kand}
+\title{Machine Learning–Based Preconditioners for Dirac Operator Inversion in Lattice QCD}
 \author{Ole Wolsing Kaa (olkaa21@student.sdu.dk)}
 
-\numberwithin{equation}{subsection}
+% \numberwithin{equation}{subsection}
 
 \DeclareMathOperator\erf{erf}
 \DeclareMathOperator\erfi{erfi}
@@ -277,5 +279,10 @@ xlist/.default=0
 \usepackage{algpseudocode}
 \usepackage{algorithm}
 
+
 % For DFA:
 \usetikzlibrary{automata,positioning}
+
+\usepackage{tocbibind}
+\setlength{\parindent}{20pt}
+\usepackage{indentfirst}

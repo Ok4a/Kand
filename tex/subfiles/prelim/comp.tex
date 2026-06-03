@@ -1,0 +1,19 @@
+The computational cost of each iteration for the different method mentioned can be see in table \ref{table: CG variant comp}. From this table we can see that CG is the computational cheapest of the five methods, but with the condition that the system matrix and the preconditioner are both SPD. For the variants of CG we first have CG on the system of normal equations can have 2 extra matrix vector product depending on implementation, but has the problem of squaring the condition number making the converges slower. Bi-CG has the similar computational cost as CG Normal with the without squaring the condition number. But can suffer from breakdowns and has irregular convergence of the residuals. Next CGS  does not need the transpose and in practice has faster converges compared to Bi-CG, but still suffers from irregular convergence and breakdowns. With the highest computational cost of the five methods is Bi-CGStab, with similar convergence rate to CGS but less irregular convergence compared to it. For the computational cost the most costly is the matrix vector product for which all beside standard CG uses 2 for the system matrix and 2 for the preconditioner, therefore the differences in cost between the variants are similar, \cite{Barrett96}. Therefore for these reasons and that it does not need the preconditioner to be SPD, we will use Bi-CGStab as the method in our exploration of trying to learn a preconditioner. 
+
+\begin{table}[H]
+\center
+\begin{tabular}{|l|c|c|c|c|}
+    \hline
+        Method & \begin{tabular}{@{}l@{}}Inner\\products\end{tabular}   & \(\alpha x+y\) & \begin{tabular}{@{}l@{}} Matrix\\vector product \end{tabular} &\begin{tabular}{@{}l@{}} Precond matrix \\vector products \end{tabular} \\ \hline
+        CG & 2 & 3 & 1 & 1\\
+        CG Normal & 2 & 3 & 1 or (1/1) & 1 or (1/1)\\
+        Bi-CG& 2 & 5 & 1/1 & 1/1\\
+        CGS & 2 & 6 & 2 & 2\\
+        Bi-CGStab & 4 & 6 & 2 & 2\\ \hline
+    \end{tabular}
+    \caption{The computational cost for an iteration for each of the five methods \cite{Barrett96}. 
+    With columns corresponding to in order the name of the method; number of inner products; number of vector scaling and addition; number of matrix vector products; number of precondition matrix vector products. a/b indicate matrix vector products with the matrix itself and its transpose respectably. a (b/c) depends on the implementation.}
+    \label{table: CG variant comp}
+\end{table}
+
+\begin{tabular}{@{}l@{}} \\ \end{tabular}

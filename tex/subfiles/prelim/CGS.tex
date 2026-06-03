@@ -1,0 +1,14 @@
+Conjugate Gradient Squared (CGS) is a variant of Bi-CG, that was made with main purpose to not have calculate the transpose of the system matrix \(A\), \cite{Saad2003}. We will not go through derivation, but will give the idea behind it. The derivations is based on the fact the both sets of residuals in Bi-CG is calculated implicitly as the product of a polynomial and the starting residual, \cite{Vorst03},
+\begin{align*}
+    r_i&=P_i(A)r_0\\
+    \tilde{r_j}&=P_j(A^T)\tilde{r_0},
+\end{align*}
+and by the bi-orthogonality of the residuals in Bi-CG, \eqref{eq: BiCG orthogonal},
+\begin{align*}
+    0&=(r_j, \tilde{r}_i)\\
+    &=(P_i(A)r_0,P_j(A)\tilde{r_0})\\
+    &=(P_j(A)P_i(A)r_0,\tilde{r_0}).
+\end{align*}
+
+Then changing to using the residual defined as \(\hat{r}_i=P_i^2(A)r_0\). With this the CGS would not have calculate the transpose of the matrix and the calculating the set of secondary residuals, \(\tilde{r}_i\), is not needed, \cite{Vorst03}. Because we will not use this method we will not show the recursion relations. This would have been shown that the computational cost of CGS is similar to Bi-CG, but generally faster convergence. It still suffers from breakdowns and irregular convergence similar to Bi-CG.
+

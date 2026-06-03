@@ -1,0 +1,88 @@
+
+26/04/2026, 15:38:17
+Config file: config/scale/initial_par_shift_scale_eris1176.ini
+Data:
+	1d_laplace_size: 25
+	amount: 1000
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1176
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 100
+	step_range: 0.5
+	method: mean
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: uniform
+	params: 0 0.1
+	num_coef: 8
+	par_list: 8
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: eris1176
+
+Train:
+(0, 1): Mean: 1321.0, median: 1321.0, std: 0.0, percent: 1321.0, B: 1000, W: 0, 
+	(1321,)
+(2, 5): Mean: 1287.0, median: 1287.0, std: 0.0, percent: 1287.0, B: 1, W: 0, 
+	(1287,)
+(3, 8): Mean: 1224.0, median: 1224.0, std: 0.0, percent: 1224.0, B: 1, W: 0, 
+	(1224,)
+(8, 21): Mean: 1128.0, median: 1128.0, std: 0.0, percent: 1128.0, B: 1, W: 0, 
+	(1128,)
+(12, 31): Mean: 1122.0, median: 1122.0, std: 0.0, percent: 1122.0, B: 1, W: 0, 
+	(1122,)
+(13, 32): Mean: 1108.0, median: 1108.0, std: 0.0, percent: 1108.0, B: 1, W: 0, 
+	(1108,)
+(14, 33): Mean: 1095.0, median: 1095.0, std: 0.0, percent: 1095.0, B: 1, W: 0, 
+	(1095,)
+(15, 34): Mean: 1091.0, median: 1091.0, std: 0.0, percent: 1091.0, B: 1, W: 0, 
+	(1091,)
+(19, 45): Mean: 1080.0, median: 1080.0, std: 0.0, percent: 1080.0, B: 1, W: 0, 
+	(1080,)
+(20, 47): Mean: 1065.0, median: 1065.0, std: 0.0, percent: 1065.0, B: 1, W: 0, 
+	(1065,)
+(21, 50): Mean: 1015.0, median: 1015.0, std: 0.0, percent: 1015.0, B: 1, W: 0, 
+	(1015,)
+(35, 91): Mean: 1003.0, median: 1003.0, std: 0.0, percent: 1003.0, B: 1, W: 0, 
+	(1003,)
+(42, 111): Mean: 997.0, median: 997.0, std: 0.0, percent: 997.0, B: 1, W: 0, 
+	(997,)
+(58, 159): Mean: 963.0, median: 963.0, std: 0.0, percent: 963.0, B: 1, W: 0, 
+	(963,)
+
+Test:
+No precond: Mean: 1134.0, median: 1134.0, std: 0.0, percent: 1134.0, flag: 0 
+	(1134,)
+
+Jacobi: Mean: 1134.0, median: 1134.0, std: 0.0, percent: 1134.0, BvN: 0, WvN: 0, flag: 0 
+	(1134,)
+
+Last: Mean: 963.0, median: 963.0, std: 0.0, percent: 963.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(963,)
+
+Best: Mean: 963.0, median: 963.0, std: 0.0, percent: 963.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(963,)
+
+Last Coef List
+{1: array([-0.0451065 , -0.09147189, -0.14678469, -0.09679866,  0.06265405,
+       -0.02746927, -0.17318552,  0.04589931])}
+
+Best Coef List
+{1: array([-0.0451065 , -0.09147189, -0.14678469, -0.09679866,  0.06265405,
+       -0.02746927, -0.17318552,  0.04589931])}
+
+Run time: 198.86760230734944

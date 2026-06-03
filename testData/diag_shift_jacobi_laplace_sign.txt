@@ -1,0 +1,507 @@
+
+21/04/2026, 09:48:29
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: normal
+	params: 1 0.60
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+Precondition:
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:
+(0, 1): Mean: 22.8, median: 23.0, std: 5.288, percent: 21.72, B: 10, W: 0, 
+	(21, 27, 25, 25, 24, 19, 15, 16, 34, 22)
+(1, 2): Mean: 20.1, median: 19.0, std: 5.54, percent: 19.66, B: 8, W: 1, 
+	(17, 23, 18, 20, 24, 17, 14, 12, 32, 24)
+(2, 4): Mean: 19.5, median: 19.0, std: 5.59, percent: 19.0, B: 4, W: 1, 
+	(16, 22, 18, 20, 25, 17, 13, 12, 32, 20)
+(3, 7): Mean: 20.1, median: 19.5, std: 6.41, percent: 19.84, B: 1, W: 4, 
+	(16, 22, 19, 20, 28, 16, 13, 12, 34, 21)
+(4, 13): Mean: 20.4, median: 18.5, std: 7.618, percent: 18.66, B: 4, W: 4, 
+	(18, 23, 18, 19, 24, 16, 12, 12, 40, 22)
+(6, 23): Mean: 20.2, median: 19.5, std: 5.582, percent: 20.28, B: 2, W: 5, 
+	(18, 21, 19, 20, 28, 18, 12, 13, 31, 22)
+(7, 26): Mean: 20.7, median: 18.5, std: 7.497, percent: 19.38, B: 5, W: 4, 
+	(17, 22, 18, 19, 24, 18, 13, 12, 40, 24)
+(8, 30): Mean: 20.4, median: 20.0, std: 6.119, percent: 19.72, B: 3, W: 4, 
+	(17, 23, 20, 20, 26, 17, 13, 12, 34, 22)
+(9, 31): Mean: 20.2, median: 18.5, std: 7.346, percent: 19.16, B: 5, W: 1, 
+	(17, 23, 18, 19, 24, 17, 13, 11, 39, 21)
+(10, 34): Mean: 19.4, median: 19.0, std: 5.953, percent: 18.5, B: 6, W: 4, 
+	(16, 21, 19, 21, 25, 16, 12, 12, 33, 19)
+
+
+21/04/2026, 09:50:57
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: normal
+	params: 1 0.60
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+Precondition:
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:
+(0, 1): Mean: 22.8, median: 23.0, std: 5.288, percent: 21.72, B: 10, W: 0, 
+	(21, 27, 25, 25, 24, 19, 15, 16, 34, 22)
+(1, 2): Mean: 20.1, median: 19.0, std: 5.54, percent: 19.66, B: 8, W: 1, 
+	(17, 23, 18, 20, 24, 17, 14, 12, 32, 24)
+(2, 4): Mean: 19.5, median: 19.0, std: 5.59, percent: 19.0, B: 4, W: 1, 
+	(16, 22, 18, 20, 25, 17, 13, 12, 32, 20)
+(3, 7): Mean: 20.1, median: 19.5, std: 6.41, percent: 19.84, B: 1, W: 4, 
+	(16, 22, 19, 20, 28, 16, 13, 12, 34, 21)
+(4, 13): Mean: 20.4, median: 18.5, std: 7.618, percent: 18.66, B: 4, W: 4, 
+	(18, 23, 18, 19, 24, 16, 12, 12, 40, 22)
+(6, 23): Mean: 20.2, median: 19.5, std: 5.582, percent: 20.28, B: 2, W: 5, 
+	(18, 21, 19, 20, 28, 18, 12, 13, 31, 22)
+(7, 26): Mean: 20.7, median: 18.5, std: 7.497, percent: 19.38, B: 5, W: 4, 
+	(17, 22, 18, 19, 24, 18, 13, 12, 40, 24)
+(8, 30): Mean: 20.4, median: 20.0, std: 6.119, percent: 19.72, B: 3, W: 4, 
+	(17, 23, 20, 20, 26, 17, 13, 12, 34, 22)
+(9, 31): Mean: 20.2, median: 18.5, std: 7.346, percent: 19.16, B: 5, W: 1, 
+	(17, 23, 18, 19, 24, 17, 13, 11, 39, 21)
+(10, 34): Mean: 19.4, median: 19.0, std: 5.953, percent: 18.5, B: 6, W: 4, 
+	(16, 21, 19, 21, 25, 16, 12, 12, 33, 19)
+
+Test:
+No precond: Mean: 27.5, median: 26.5, std: 8.37, percent: 27.28, flag: 0 
+	(35, 33, 23, 21, 45, 15, 23, 30, 30, 20)
+
+Jacobi: Mean: 22.7, median: 20.5, std: 8.741, percent: 24.12, BvN: 8, WvN: 2, flag: 0 
+	(28, 35, 22, 15, 36, 10, 15, 19, 31, 16)
+
+Last: Mean: 21.9, median: 19.0, std: 7.905, percent: 23.72, BvN: 9, WvN: 1, BvJ: 6, WvJ: 4, flag: 0 
+	(33, 34, 20, 16, 32, 12, 16, 18, 24, 14)
+
+Best: Mean: 21.9, median: 19.0, std: 7.905, percent: 23.72, BvN: 9, WvN: 1, BvJ: 6, WvJ: 4, flag: 0 
+	(33, 34, 20, 16, 32, 12, 16, 18, 24, 14)
+
+Last Coef List
+{1: array([-0.02452197]), -1: array([-0.03081336])}
+
+Best Coef List
+{1: array([-0.02452197]), -1: array([-0.03081336])}
+
+Run time: 81.37049460000708
+
+21/04/2026, 09:52:55
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: uniform
+	params: 1 0.60
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+Precondition:
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:
+(0, 1): Mean: 22.2, median: 19.0, std: 6.539, percent: 23.4, B: 10, W: 0, 
+	(27, 17, 19, 35, 17, 32, 18, 23, 19, 15)
+(1, 2): Mean: 20.1, median: 17.5, std: 6.625, percent: 20.72, B: 8, W: 1, 
+	(28, 14, 17, 28, 16, 32, 13, 22, 18, 13)
+(2, 4): Mean: 19.6, median: 16.5, std: 7.658, percent: 19.34, B: 6, W: 2, 
+	(28, 12, 16, 24, 17, 37, 12, 21, 16, 13)
+(3, 7): Mean: 19.7, median: 16.5, std: 7.511, percent: 19.06, B: 1, W: 4, 
+	(24, 13, 16, 26, 17, 38, 13, 21, 16, 13)
+(4, 12): Mean: 19.3, median: 16.5, std: 6.649, percent: 19.68, B: 4, W: 2, 
+	(29, 13, 16, 23, 16, 33, 13, 20, 17, 13)
+(5, 13): Mean: 19.0, median: 16.5, std: 6.45, percent: 19.78, B: 4, W: 4, 
+	(32, 11, 16, 25, 17, 27, 13, 19, 16, 14)
+(7, 23): Mean: 19.5, median: 17.0, std: 5.971, percent: 21.06, B: 1, W: 4, 
+	(29, 12, 16, 25, 18, 30, 16, 19, 16, 14)
+(8, 24): Mean: 19.2, median: 16.0, std: 6.03, percent: 20.12, B: 4, W: 3, 
+	(31, 13, 16, 24, 16, 28, 14, 20, 16, 14)
+(9, 30): Mean: 19.5, median: 17.0, std: 6.454, percent: 20.46, B: 2, W: 3, 
+	(31, 13, 17, 23, 16, 31, 13, 20, 17, 14)
+(10, 33): Mean: 19.8, median: 16.5, std: 5.93, percent: 21.44, B: 4, W: 4, 
+	(28, 13, 16, 29, 17, 28, 16, 21, 16, 14)
+
+Test:
+No precond: Mean: 17.1, median: 17.5, std: 2.663, percent: 17.22, flag: 0 
+	(16, 11, 17, 18, 16, 19, 15, 19, 21, 19)
+
+Jacobi: Mean: 15.1, median: 16.0, std: 2.468, percent: 15.22, BvN: 9, WvN: 0, flag: 0 
+	(14, 9, 15, 17, 16, 16, 13, 16, 18, 17)
+
+Last: Mean: 16.9, median: 16.0, std: 2.663, percent: 17.0, BvN: 6, WvN: 1, BvJ: 3, WvJ: 4, flag: 0 
+	(16, 23, 15, 16, 15, 19, 13, 16, 17, 19)
+
+Best: Mean: 16.3, median: 16.0, std: 1.9, percent: 16.78, BvN: 7, WvN: 1, BvJ: 4, WvJ: 5, flag: 0 
+	(16, 19, 16, 16, 15, 17, 12, 16, 17, 19)
+
+Last Coef List
+{1: array([-0.06962883]), -1: array([-0.06527763])}
+
+Best Coef List
+{1: array([-0.06962883]), -1: array([-0.05855666])}
+
+Run time: 81.35023670000373
+
+21/04/2026, 09:59:29
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: uniform
+	params: 1 0.60
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+Precondition:
+	dist_type: uniform
+	params: 0 0.05
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:
+(0, 1): Mean: 21.0, median: 18.5, std: 6.588, percent: 22.5, B: 10, W: 0, 
+	(30, 15, 18, 30, 17, 32, 15, 20, 19, 14)
+(1, 2): Mean: 18.9, median: 17.0, std: 5.718, percent: 19.28, B: 8, W: 1, 
+	(26, 12, 16, 29, 17, 25, 13, 21, 17, 13)
+(2, 6): Mean: 18.7, median: 16.5, std: 6.198, percent: 19.0, B: 4, W: 1, 
+	(25, 11, 15, 31, 17, 25, 13, 21, 16, 13)
+(3, 7): Mean: 21.2, median: 19.0, std: 5.455, percent: 22.28, B: 1, W: 8, 
+	(29, 16, 18, 29, 17, 28, 16, 24, 20, 15)
+(4, 13): Mean: 21.0, median: 19.0, std: 5.495, percent: 21.5, B: 4, W: 2, 
+	(28, 16, 18, 27, 18, 31, 15, 22, 20, 15)
+(5, 14): Mean: 20.1, median: 18.5, std: 5.338, percent: 20.78, B: 8, W: 0, 
+	(27, 15, 17, 26, 18, 30, 14, 20, 19, 15)
+(7, 24): Mean: 20.6, median: 19.0, std: 5.122, percent: 21.5, B: 1, W: 6, 
+	(28, 15, 18, 28, 18, 27, 14, 22, 20, 16)
+(8, 25): Mean: 20.3, median: 19.0, std: 5.158, percent: 21.0, B: 4, W: 2, 
+	(29, 15, 18, 27, 17, 27, 15, 20, 20, 15)
+(9, 26): Mean: 18.3, median: 17.0, std: 4.941, percent: 18.78, B: 8, W: 0, 
+	(25, 13, 16, 26, 17, 24, 12, 20, 17, 13)
+(10, 32): Mean: 19.3, median: 16.5, std: 7.156, percent: 19.12, B: 2, W: 2, 
+	(27, 13, 16, 23, 17, 36, 12, 20, 16, 13)
+
+Test:
+No precond: Mean: 17.1, median: 17.5, std: 2.663, percent: 17.22, flag: 0 
+	(16, 11, 17, 18, 16, 19, 15, 19, 21, 19)
+
+Jacobi: Mean: 15.1, median: 16.0, std: 2.468, percent: 15.22, BvN: 9, WvN: 0, flag: 0 
+	(14, 9, 15, 17, 16, 16, 13, 16, 18, 17)
+
+Last: Mean: 14.9, median: 16.0, std: 2.508, percent: 14.28, BvN: 8, WvN: 0, BvJ: 4, WvJ: 3, flag: 0 
+	(12, 11, 16, 16, 16, 16, 11, 15, 18, 18)
+
+Best: Mean: 14.9, median: 15.5, std: 2.256, percent: 14.72, BvN: 10, WvN: 0, BvJ: 3, WvJ: 1, flag: 0 
+	(14, 10, 15, 16, 15, 16, 12, 16, 18, 17)
+
+Last Coef List
+{1: array([-0.03505213]), -1: array([-0.01885751])}
+
+Best Coef List
+{1: array([-0.02034426]), -1: array([-0.03368491])}
+
+Run time: 74.97010910000245
+
+21/04/2026, 10:01:16
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: uniform
+	params: 1 0.60
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:
+(0, 1): Mean: 22.2, median: 19.0, std: 6.539, percent: 23.4, B: 10, W: 0, 
+	(27, 17, 19, 35, 17, 32, 18, 23, 19, 15)
+(1, 2): Mean: 20.1, median: 17.5, std: 6.625, percent: 20.72, B: 8, W: 1, 
+	(28, 14, 17, 28, 16, 32, 13, 22, 18, 13)
+(2, 4): Mean: 19.6, median: 16.5, std: 7.658, percent: 19.34, B: 6, W: 2, 
+	(28, 12, 16, 24, 17, 37, 12, 21, 16, 13)
+(3, 7): Mean: 19.7, median: 16.5, std: 7.511, percent: 19.06, B: 1, W: 4, 
+	(24, 13, 16, 26, 17, 38, 13, 21, 16, 13)
+(4, 12): Mean: 19.3, median: 16.5, std: 6.649, percent: 19.68, B: 4, W: 2, 
+	(29, 13, 16, 23, 16, 33, 13, 20, 17, 13)
+(5, 13): Mean: 19.0, median: 16.5, std: 6.45, percent: 19.78, B: 4, W: 4, 
+	(32, 11, 16, 25, 17, 27, 13, 19, 16, 14)
+(7, 23): Mean: 19.5, median: 17.0, std: 5.971, percent: 21.06, B: 1, W: 4, 
+	(29, 12, 16, 25, 18, 30, 16, 19, 16, 14)
+(8, 24): Mean: 19.2, median: 16.0, std: 6.03, percent: 20.12, B: 4, W: 3, 
+	(31, 13, 16, 24, 16, 28, 14, 20, 16, 14)
+(9, 30): Mean: 19.5, median: 17.0, std: 6.454, percent: 20.46, B: 2, W: 3, 
+	(31, 13, 17, 23, 16, 31, 13, 20, 17, 14)
+(10, 33): Mean: 19.8, median: 16.5, std: 5.93, percent: 21.44, B: 4, W: 4, 
+	(28, 13, 16, 29, 17, 28, 16, 21, 16, 14)
+
+Test:
+No precond: Mean: 17.1, median: 17.5, std: 2.663, percent: 17.22, flag: 0 
+	(16, 11, 17, 18, 16, 19, 15, 19, 21, 19)
+
+Jacobi: Mean: 15.1, median: 16.0, std: 2.468, percent: 15.22, BvN: 9, WvN: 0, flag: 0 
+	(14, 9, 15, 17, 16, 16, 13, 16, 18, 17)
+
+Last: Mean: 16.9, median: 16.0, std: 2.663, percent: 17.0, BvN: 6, WvN: 1, BvJ: 3, WvJ: 4, flag: 0 
+	(16, 23, 15, 16, 15, 19, 13, 16, 17, 19)
+
+Best: Mean: 16.3, median: 16.0, std: 1.9, percent: 16.78, BvN: 7, WvN: 1, BvJ: 4, WvJ: 5, flag: 0 
+	(16, 19, 16, 16, 15, 17, 12, 16, 17, 19)
+
+Last Coef List
+{1: array([-0.06962883]), -1: array([-0.06527763])}
+
+Best Coef List
+{1: array([-0.06962883]), -1: array([-0.05855666])}
+
+Run time: 79.13032660000317
+
+21/04/2026, 11:03:00
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: uniform
+	params: 1 0.60
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:
+(0, 1): Mean: 22.2, median: 19.0, std: 6.539, percent: 23.4, B: 10, W: 0, 
+	(27, 17, 19, 35, 17, 32, 18, 23, 19, 15)
+(1, 2): Mean: 20.1, median: 17.5, std: 6.625, percent: 20.72, B: 8, W: 1, 
+	(28, 14, 17, 28, 16, 32, 13, 22, 18, 13)
+(2, 4): Mean: 19.6, median: 16.5, std: 7.658, percent: 19.34, B: 6, W: 2, 
+	(28, 12, 16, 24, 17, 37, 12, 21, 16, 13)
+(3, 7): Mean: 19.7, median: 16.5, std: 7.511, percent: 19.06, B: 1, W: 4, 
+	(24, 13, 16, 26, 17, 38, 13, 21, 16, 13)
+
+21/04/2026, 11:03:35
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: uniform
+	params: 1 0.60
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:
+(0, 1): Mean: 22.2, median: 19.0, std: 6.539, percent: 23.4, B: 10, W: 0, 
+	(27, 17, 19, 35, 17, 32, 18, 23, 19, 15)
+(1, 2): Mean: 20.1, median: 17.5, std: 6.625, percent: 20.72, B: 8, W: 1, 
+	(28, 14, 17, 28, 16, 32, 13, 22, 18, 13)
+
+21/04/2026, 11:03:51
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: uniform
+	params: 1 4
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:
+(0, 1): Mean: 68.6, median: 63.5, std: 24.283, percent: 65.2, B: 10, W: 0, 
+	(72, 42, 70, 59, 46, 50, 60, 129, 67, 91)
+(1, 2): Mean: 39.5, median: 36.0, std: 11.227, percent: 39.18, B: 10, W: 0, 
+	(45, 39, 51, 27, 43, 30, 30, 32, 65, 33)
+(2, 3): Mean: 38.2, median: 35.0, std: 9.228, percent: 38.12, B: 5, W: 4, 
+	(48, 35, 35, 27, 41, 33, 31, 30, 59, 43)
+
+21/04/2026, 11:04:09
+Config file: test_config.ini
+Data:
+	1d_laplace_size: 5
+	amount: 10
+	dist_type: uniform
+	params: 1 40
+	seed: 0
+	dim: 25
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 11
+	step_range: 0.1
+	method: sign
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: True
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: normal
+	params: 0 0.05
+	num_coef: 2
+	par_list: 1 1
+	diag_list: 1 -1
+	type: diag_shift
+	diag: jacobi
+	sym: False
+
+Train:

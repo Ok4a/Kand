@@ -1,0 +1,22 @@
+One way to solve the linear system, \(Ax=b\), where the matrix, \(A\), is not symmetric, is to solve an equivalent system, known as the system of the normal equations
+\begin{equation}\label{eq: normal eq}
+    A^TAx=A^Tb,
+\end{equation}
+
+\noindent this systems matrix, \(A^TA\), is positive definite
+\begin{equation}
+    x^TA^TAx=||Ax||\geq 0, \forall x \in \mathbb{R}\backslash \left\lbrace 0\right\rbrace,
+\end{equation}
+and can can only take a value of zero if \(A\) is a matrix of all zeros and therefore also singular. The new system matrix is also symmetric
+\begin{equation}
+    (A^TA)^T=A^T(A^T)^T=A^TA.
+\end{equation}
+
+Which means the transformed system can be solved with CG, but it does not come for free. It either needs an t extra matrix vector product needed in each iteration of the algorithm, with the transpose of the matrix, which the is difficulty of is depend on the implementation of the matrix. Or a matrix matrix product before all iterations which is a costly operator even when only done once.
+
+\noindent A bigger problem is the condition number of the new matrix is the square of the original matrix, \cite{Saad2003},
+\begin{equation*}
+    \kappa(A^TA)=\kappa(A)^2,
+\end{equation*}
+
+\noindent meaning that convergence will be slower, and with the extra matrix vector product the run time of the algorithm will increase. One could then precondition the system, as described in section \ref{sec: prelim precond}, to lower the condition number. This still has the condition that the preconditioner needs to be SPD for the CG to work on the preconditioned system.

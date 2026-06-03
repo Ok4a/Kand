@@ -1,0 +1,76 @@
+
+26/04/2026, 15:39:17
+Config file: config/scale/initial_par_shift_scale_fidap004.ini
+Data:
+	1d_laplace_size: 25
+	amount: 1000
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 1601
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 100
+	step_range: 0.1
+	method: mean
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: uniform
+	params: 0 0.05
+	num_coef: 8
+	par_list: 8
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: fidap004
+
+Train:
+(0, 1): Mean: 5054.0, median: 5054.0, std: 0.0, percent: 5054.0, B: 1000, W: 0, 
+	(5054,)
+(1, 4): Mean: 4746.0, median: 4746.0, std: 0.0, percent: 4746.0, B: 1, W: 0, 
+	(4746,)
+(2, 5): Mean: 4671.0, median: 4671.0, std: 0.0, percent: 4671.0, B: 1, W: 0, 
+	(4671,)
+(4, 10): Mean: 4645.0, median: 4645.0, std: 0.0, percent: 4645.0, B: 1, W: 0, 
+	(4645,)
+(6, 15): Mean: 4598.0, median: 4598.0, std: 0.0, percent: 4598.0, B: 1, W: 0, 
+	(4598,)
+(7, 17): Mean: 4539.0, median: 4539.0, std: 0.0, percent: 4539.0, B: 1, W: 0, 
+	(4539,)
+(20, 55): Mean: 4396.0, median: 4396.0, std: 0.0, percent: 4396.0, B: 1, W: 0, 
+	(4396,)
+(66, 191): Mean: 4376.0, median: 4376.0, std: 0.0, percent: 4376.0, B: 1, W: 0, 
+	(4376,)
+
+Test:
+No precond: Mean: 4695.0, median: 4695.0, std: 0.0, percent: 4695.0, flag: 0 
+	(4695,)
+
+Jacobi: Mean: 4695.0, median: 4695.0, std: 0.0, percent: 4695.0, BvN: 0, WvN: 0, flag: 0 
+	(4695,)
+
+Last: Mean: 4376.0, median: 4376.0, std: 0.0, percent: 4376.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(4376,)
+
+Best: Mean: 4376.0, median: 4376.0, std: 0.0, percent: 4376.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(4376,)
+
+Last Coef List
+{1: array([-0.00804508, -0.02302133, -0.02103957,  0.01275038, -0.00213346,
+        0.12829004, -0.06197221,  0.02294966])}
+
+Best Coef List
+{1: array([-0.00804508, -0.02302133, -0.02103957,  0.01275038, -0.00213346,
+        0.12829004, -0.06197221,  0.02294966])}
+
+Run time: 681.6084735719487

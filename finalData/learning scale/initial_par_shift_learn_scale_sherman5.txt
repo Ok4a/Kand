@@ -1,0 +1,68 @@
+
+26/04/2026, 15:36:13
+Config file: config/scale/initial_par_shift_scale_sherman5.ini
+Data:
+	1d_laplace_size: 25
+	amount: 1000
+	dist_type: uniform
+	params: 1 10
+	seed: 0
+	dim: 3312
+Solver:
+	tol: 1e-10
+	max_iteration: None
+Learn:
+	iteration_count: 100
+	step_range: 0.01
+	method: mean
+	seed: 0
+	change_scales: 1 0.5 0.25
+	allow_disimprovement: False
+	disimprovement_scale: 1
+	median_best_scale: 0.5
+	mean_best_scale: 0.5
+	flag_count_limit: 0
+Precondition:
+	dist_type: uniform
+	params: 0 0.05
+	num_coef: 4
+	par_list: 4
+	diag_list: 1
+	type: diag_shift
+	diag: eye
+	sym: False
+Other:
+	matrix_name: sherman5
+
+Train:
+(0, 1): Mean: 2967.0, median: 2967.0, std: 0.0, percent: 2967.0, B: 1000, W: 0, 
+	(2967,)
+(2, 7): Mean: 2931.0, median: 2931.0, std: 0.0, percent: 2931.0, B: 1, W: 0, 
+	(2931,)
+(3, 10): Mean: 2722.0, median: 2722.0, std: 0.0, percent: 2722.0, B: 1, W: 0, 
+	(2722,)
+(8, 25): Mean: 2710.0, median: 2710.0, std: 0.0, percent: 2710.0, B: 1, W: 0, 
+	(2710,)
+(14, 43): Mean: 2588.0, median: 2588.0, std: 0.0, percent: 2588.0, B: 1, W: 0, 
+	(2588,)
+
+Test:
+No precond: Mean: 3115.0, median: 3115.0, std: 0.0, percent: 3115.0, flag: 0 
+	(3115,)
+
+Jacobi: Mean: 3115.0, median: 3115.0, std: 0.0, percent: 3115.0, BvN: 0, WvN: 0, flag: 0 
+	(3115,)
+
+Last: Mean: 2588.0, median: 2588.0, std: 0.0, percent: 2588.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(2588,)
+
+Best: Mean: 2588.0, median: 2588.0, std: 0.0, percent: 2588.0, BvN: 1, WvN: 0, BvJ: 1, WvJ: 0, flag: 0 
+	(2588,)
+
+Last Coef List
+{1: array([ 0.02295272, -0.02021988, -0.04590265, -0.04834724])}
+
+Best Coef List
+{1: array([ 0.02295272, -0.02021988, -0.04590265, -0.04834724])}
+
+Run time: 494.5346119245514

@@ -1,0 +1,77 @@
+In exact arithmetic, meaning that there is no rounding, CG will converge at the latest \(n\) iterations for a linear system of size \(n\). This is because the residuals created in each iteration form an orthogonal basis for the Krylov subspace of increasing dimension. therefore a maximum of \(n\) residuals can be made before the Krylov subspace coincides with \(\mathbb{R}^n\). In implementation this only occurrs for well conditioned matrices, meaning a matrix with low condition number. Where the condition number of an invertible matrix can be defined as, \cite{Vorst03},
+\begin{equation}
+    \kappa(A)=||A||_2||A^{-1}||_2=\frac{\lambda_{max}}{\lambda_{min}}.
+\end{equation}
+
+To show a practical convergence rate of CG will find a bound for the \(A\)-norm of the error at \(i\)'th iteration, \(||x_i-x||_A\), where \(x_i\) is the \(i\)'th approximation and \(x\) is the exact solution.
+
+\noindent For a vector \(u\in x_0 +\mathcal{K}^i(A;r_0)\) and a polynomial \(Q_i\) of degree \(i\) and \(Q_i(0)=1\) then
+\begin{equation}\label{eq: x-u=Q(x-x0)}
+    x-u=Q_i(A)(x-x_0).
+\end{equation}
+This is proven by \(u\in x_0 +\mathcal{K}^i(A;r_0)\implies u=x_0+\hat{Q}_{i-1}(A)r_0\), \(r_0=b-Ax_0\) and \(Ax=b\), implies that
+\begin{align*}
+    x-u&=x-(x_0+\hat{Q}_{i-1}(A)r_0)\\
+    &=x-(x_0+\hat{Q}_{i-1}(A)(Ax-Ax_0)).\\
+\intertext{Then define \(\tilde{Q}_i(A)=\hat{Q}_{i-1}(A)A\) with \(\tilde{Q}_i(0)=0\)}
+    &=(x-x_0)-\tilde{Q}_i(A)(x-x_0)\\
+    &=(I-\tilde{Q}_i(A))(x-x_0)
+\intertext{define \(Q_i(A)=I-\tilde{Q}_i(A)\) with \(Q_i(0)=1\)}
+    &=Q_i(A)(x-x_0).
+\end{align*}
+
+This means that by \eqref{eq: x-u=Q(x-x0)} we can write the \(i\)'th iterations error as a initial error times a polynomial of degree \(i\),
+\begin{equation}
+    x_i-x=P_i(A)(x_0-x).
+\end{equation}
+
+Next denote the eigenvalues and orthonormalized eigenvectors of \(A\) as \(\lambda_j\) and \(z_j\), which means we can write \(r_0\) as a linear combination of the eigenvectors \(r_0=\sum_{j}\gamma_j z_j \) with scalers \(\gamma_j\) and because \(r_i\) can be written as polynomial of \(A\) of degree \(i\) with \(P(0)=1\) times the initial residual \(r_0\), \cite{Vorst03}, therefore \(r_i\) can be written as
+\begin{equation}\label{eq: eigenvectors r_i}
+    r_i=P_i(A)r_0=\sum_{j}\gamma_j P_i(\lambda_j)z_j.
+\end{equation}
+
+\noindent We can now find a bound for the squared norm of the \(i\)'th iterations error
+\begin{align*}
+    ||x_i-x||_A^2&=||P_i(A)(x_0-x)||_A^2\\
+    &=(x_0-x)^TP_i(A)AP_i(A)(x_0-x)\\
+    &=(x_0-x)^TP_i^T(A)P_i(A)(Ax_0-Ax)\\
+\intertext{When by \(r_i=b-Ax_i \implies Ax_i=b-r_i\) and \(Ax=b\)}
+    &=(x_0-x)^TP_i^T(A)P_i(A)(-r_0)\\
+\intertext{when by \eqref{eq: eigenvectors r_i}}
+    &=(x-x_0)^TP_i^T(A)\sum_{j}\gamma_j P_i(\lambda_j)z_j\\
+    &=(x-x_0)^T A^T A^{-T} P_i^T(A)\sum_{j}\gamma_j P_i(\lambda_j)z_j\\
+    &=(A(x-x_0))^T A^{-T} P_i^T(A)\sum_{j}\gamma_j P_i(\lambda_j)z_j\\
+    &=(r_0)^T P_i^T(A)A^{-T}\sum_{j}\gamma_j P_i(\lambda_j)z_j\\
+\intertext{again with the transpose of \eqref{eq: eigenvectors r_i}}
+    &=\sum_{l}(\gamma_l P_i(\lambda_l)z_l)A^{-T}\sum_{j}\gamma_j P_i(\lambda_j)z_j\\
+\intertext{because \(Az_l=\lambda_l z_l \implies A^{-1}z_l=\frac{1}{\lambda_l}z_l\)}
+    &=\sum_{l}(\frac{\gamma_l}{\lambda_l} P_i(\lambda_l)z_l)\sum_{j}\gamma_j P_i(\lambda_j)z_j\\
+\intertext{Now because the eigenvectors \(z_j\) form an orthonormal basis we finaly get}
+    &=\sum_{j}\frac{\gamma_j^2}{\lambda_j} P_i(\lambda_j)
+\end{align*}
+
+\noindent The sum can now be bounded by the maximum of \(|P_i(\lambda_j)|\) and instead of the optimal polynomial \(P_i\) using an arbitrary polynomial \(Q_i\) of degree \(i\) with \(Q_i(0)=1\).
+\begin{equation*}
+    \sum_{j}\frac{\gamma_j^2}{\lambda_j} P_i(\lambda_j)\leq \max_{j}|Q_i(\lambda_j)|\sum_{j}\frac{\gamma_j^2}{\lambda_j}.
+\end{equation*}
+
+\noindent With a similar derivation as the previous, it can be shown that \(\sum_{j}\frac{\gamma_j^2}{\lambda_j}=||x_0-x||_A^2\). 
+
+\begin{equation*}
+    ||x_i-x||_A^2\leq \max_{j}|Q_i(\lambda_j)|\,||x_0-x||_A^2.
+\end{equation*}
+
+By replacing the arbitrary polynomial \(Q_i\) with the Chebyshev polynomial \(C_i\) transformed and scaled such that when evaluated at zero it equals 1, 
+\begin{equation*}
+    Q_i(\lambda)=\frac{C_i \left(\frac{2\lambda-(\lambda_{min}+\lambda_{max})}{\lambda_{max}-\lambda_{min}}\right)}{C_i \left(- \frac{\lambda_{min}+\lambda_{max}}{\lambda_{max}-\lambda_{min}}\right)}
+\end{equation*}
+where \(\lambda_{min}\) and \(\lambda_{max}\) are the minimum and maximum eigenvalues. We get the bound, \cite{Vorst03},
+\begin{equation}
+    ||x_i-x||_A^2\leq 2 \left(\frac{\sqrt{\kappa(A)}-1}{\sqrt{\kappa(A)}+1}\right)^i||x_0-x||_A^2,
+\end{equation}
+where \(\kappa(A)\) is called the condition number of \(A\) and is defined as
+\begin{equation*}
+    \kappa(A)=||A||_2||A^{-1}||_2=\frac{\lambda_{max}}{\lambda_{min}}.
+\end{equation*}
+
+From this we can conclude that the convergence rate of CG for matrices with higher condition number has a slower convergence than matrix with a low condition number.
